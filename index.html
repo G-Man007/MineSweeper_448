@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>MineSweeper</title>
-      <link href="assets/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-      <link href="assets/style.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>MineSweeper</title>
+  <link href="assets/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/style.css" rel="stylesheet">
+  <link href="assets/js/draw.js">
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -23,7 +24,14 @@
         <li><a href="/">Flags left</a></li>
         <li><a href="/articles">Bomb number</a></li>
         <li><a href="/">Board size</a></li>
-        <li><button type="button" class="btn btn-success">Reset</button></li>
+        <li><button type="button" id="btn-success">Reset</button></li>
+        <script>
+          let button = document.getElementById('btn-success');
+          let pressed = false;
+          button.addEventListener("click", function(event){
+            pressed = true;
+          });
+        </script>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
