@@ -1,10 +1,7 @@
 function drawBoard(dimension){
      let lastClicked;
      let grid = clickableGrid(dimension,dimension,function(el,row,col,i){
-
        el.className='clicked';
-       if (lastClicked) lastClicked.className='';
-       lastClicked = el;
      });
 
      document.body.appendChild(grid);
