@@ -39,5 +39,6 @@ function drawBoard(dimension, bombsLeft){
        if(bombsLeft > 0){
         return(Math.random() <= (bombsLeft / cellsLeft));
       }
+      return false;
      }
 }
