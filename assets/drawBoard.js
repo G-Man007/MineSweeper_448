@@ -1,8 +1,10 @@
 function drawBoard(dimension, bombsLeft){
      let lastClicked;
+     let cellsLeft = dimension * dimension;
+
      let grid = clickableGrid(dimension,dimension,function(element,row,col,i,isBomb){
        element.className = 'clicked';
-       if(isBomb == true){
+       if(element.isBomb == true){
          element.className = 'bomb';
        }
      });
@@ -17,15 +19,16 @@ function drawBoard(dimension, bombsLeft){
          let tr = grid.appendChild(document.createElement('tr')); //creates a new row for each r value
          for (let c=0; c<cols; c++){
            let cell = tr.appendChild(document.createElement('td')); //creates a new table data cell in the current row for each column
-           let isBomb = placeBombs(r,c,bombsLeft);
-           if(isBomb == true){
+           cell.isBomb = placeBombs(r,c,bombsLeft);
+           cellsLeft--;
+           if(cell.isBomb == true){
               bombsLeft--;
            }
-           cell.addEventListener('click',(function(element,r,c,i,isBomb){ //on a click it creates a function scope for all of the local variables for a cell
+           cell.addEventListener('click',(function(element,r,c,i){ //on a click it creates a function scope for all of the local variables for a cell
              return function(){
-               callback(element,r,c,i,isBomb); //function that allows refernce to specific instance by creating closure
+               callback(element,r,c,i); //function that allows refernce to specific instance by creating closure
              }
-           })(cell,r,c,i,isBomb),
+           })(cell,r,c,i),
             false);
          }
        }
@@ -34,13 +37,7 @@ function drawBoard(dimension, bombsLeft){
 
      function placeBombs(rows, cols, bombsLeft){
        if(bombsLeft > 0){
-        let check = Math.floor(Math.random() * 10);
-        if (check > 5){
-          return true;
-        }
-        else{
-          return false;
-        }
+        return(Math.random() <= (bombsLeft / cellsLeft));
       }
      }
-   }
+}
