@@ -1,12 +1,20 @@
-/*.navbar-default {
-    background-color: #2b2d30;
-    border-color: #E7E7E7;
-}*/
+.navbar-brand{ /*Minesweeper title text*/
+  color: white !important;
+  font-size: 200%;
+}
 
-.btn-success {
+.navbar-nav a{ /*settings text*/
+  color: white !important;
+}
+
+.btn-success { /*reset button*/
   margin: 12%;
 }
 
 .navbar-text {
     color: white;
+}
+
+input {
+  width:5% !important;
 }
