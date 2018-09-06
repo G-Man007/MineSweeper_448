@@ -3,7 +3,6 @@ class Tile {
 		this.mine = false;
 		this.flag = false;
 		this.adjminenum = 0;
-		this.cell = 0;
 	}
 }
 class mineField {
@@ -14,14 +13,13 @@ class mineField {
 		this.flags = numBombs;
         this.arr = [];
 		let cells = height * width;
-		//let x = new Tile();
         for(let i = 0; i < width; i++){
             this.arr.push([0]);
             for(let j = 0; j < height; j++){
                 this.arr[i][j] = new Tile();
-				if(Math.floor(Math.random() * 3) == 1){
+				/*if(Math.floor(Math.random() * 3) == 1){
 					this.arr[i][j] = true;
-					/*if(i > 0){
+					if(i > 0){
 						this.arr[i-1][j].adjminenum++;
 						if(j > 0){
 							this.arr[i-1][j-1].adjminenum++;
@@ -44,23 +42,23 @@ class mineField {
 						if(j > dimension-1){
 							this.arr[i+1][j+1].adjminenum++;
 						}
-					}*/
-				}
+					}
+				}*/
             }
-        }
-		/*this.arr[3][1].mine = true;
+        }//populates the array couldn't get adding mines to work
+		this.arr[3][1].mine = true;
 		this.arr[3][2].mine = true;
 		this.arr[3][3].mine = true;
 		this.arr[3][4].mine = true;
-		this.arr[3][0].mine = true;*/
+		this.arr[3][0].mine = true;
     }
 	Click(cell,row,col,i,dimension){
-		if(cell[row][col].field.arr[row][col].adjminenum == 0 && cell[row][col].field.arr[row][col].mine != true){
-			cell[row][col].field.Expand(cell,row,col,dimension);
+		if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
+			this.Expand(cell,row,col,dimension);
 		}
-        else if(cell[row][col].field.arr[row][col].mine == true){
+        else if(this.arr[row][col].mine == true){
         	cell[row][col].className = 'bomb';
-		}
+		}//need statements for if the adjacent mines are >0 but works now
 	}
 	Flag(x,y) {
 		this.arr[x][y].flag = true;
@@ -71,9 +69,8 @@ class mineField {
 	}
 	Expand(cell, row, col, dimension) {
 		if(cell[row][col].className == 'clicked'){
-			console.log("you did it");
 			return;
-		}
+		}//temporary until we get adjacent mine numbers working
 		if(this.arr[row][col].adjminenum == 0 && !(this.arr[row][col].mine)){
 			cell[row][col].className = 'clicked';
 			if(row > 0){
@@ -100,6 +97,6 @@ class mineField {
 					this.Expand(cell,row+1,col+1,dimension);
 				}
 			}
-		}
+		}//recursively calls for it to go out to all squares if there is no mine near it
 	}
 }

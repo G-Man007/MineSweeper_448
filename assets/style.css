@@ -14,24 +14,3 @@
 .grid td.bomb {
   background-color:red;
 }
-.grid td.clicked2 {
-  background-color:green;
-}
-.grid td.clicked3 {
-  background-color:blue;
-}
-.grid td.clicked4 {
-  background-color:pink;
-}
-.grid td.clicked5 {
-  background-color:yellow;
-}
-.grid td.clicked6 {
-  background-color:orange;
-}
-.grid td.clicked7 {
-  background-color:purple;
-}
-.grid td.clicked8 {
-  background-color:black;
-}

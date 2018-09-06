@@ -2,7 +2,7 @@
 let cell = [];
 function drawBoard(dimension, bombsLeft){
 	if(cell != []){
-		
+
 	}
 	let lastClicked;
 	let field = new mineField(dimension, dimension, bombsLeft);
@@ -15,7 +15,7 @@ function drawBoard(dimension, bombsLeft){
 
     document.body.appendChild(grid);
 
-    function clickableGrid( rows, cols, callback ){
+	function clickableGrid( rows, cols, callback ){
     	let i=0;
         let grid = document.createElement('table');
         grid.className = 'grid';
