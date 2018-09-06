@@ -14,20 +14,52 @@ class mineField {
 		this.flags = numBombs;
         this.arr = [];
 		let cells = height * width;
-		let x = new Tile();
+		//let x = new Tile();
         for(let i = 0; i < width; i++){
             this.arr.push([0]);
             for(let j = 0; j < height; j++){
-                this.arr[i][j] = x;
+                this.arr[i][j] = new Tile();
+				if(Math.floor(Math.random() * 3) == 1){
+					this.arr[i][j] = true;
+					/*if(i > 0){
+						this.arr[i-1][j].adjminenum++;
+						if(j > 0){
+							this.arr[i-1][j-1].adjminenum++;
+						}
+						if(j > dimension-1){
+							this.arr[i-1][j+1].adjminenum++;
+						}
+					}
+					if(j > 0){
+						this.arr[i][j-1].adjminenum++;
+					}
+					if(j < dimension-1){
+						this.arr[i][j+1].adjminenum++;
+					}
+					if(i < dimension-1){
+						this.arr[i+1][j].adjminenum++;
+						if(j > 0){
+							this.arr[i+1][j-1].adjminenum++;
+						}
+						if(j > dimension-1){
+							this.arr[i+1][j+1].adjminenum++;
+						}
+					}*/
+				}
             }
         }
+		/*this.arr[3][1].mine = true;
+		this.arr[3][2].mine = true;
+		this.arr[3][3].mine = true;
+		this.arr[3][4].mine = true;
+		this.arr[3][0].mine = true;*/
     }
-	Click(element,row,col,i,dimension){
-		if(element.field.arr[row][col].adjminenum == 0 && element.field.arr[row][col].mine != true){
-			element.field.Expand(element,row,col,dimension);
+	Click(cell,row,col,i,dimension){
+		if(cell[row][col].field.arr[row][col].adjminenum == 0 && cell[row][col].field.arr[row][col].mine != true){
+			cell[row][col].field.Expand(cell,row,col,dimension);
 		}
-        else if(element.field.arr[row][col].mine == true){
-        	element.className = 'bomb';
+        else if(cell[row][col].field.arr[row][col].mine == true){
+        	cell[row][col].className = 'bomb';
 		}
 	}
 	Flag(x,y) {
@@ -37,35 +69,35 @@ class mineField {
 
 		}
 	}
-	Expand(element, row, col, dimension) {
-		if(element.className == 'clicked'){
+	Expand(cell, row, col, dimension) {
+		if(cell[row][col].className == 'clicked'){
 			console.log("you did it");
 			return;
 		}
-		if(element.field.arr[row][col].adjminenum == 0){
-			element.className = 'clicked';
+		if(this.arr[row][col].adjminenum == 0 && !(this.arr[row][col].mine)){
+			cell[row][col].className = 'clicked';
 			if(row > 0){
-				element.field.Expand(this.arr[row-1][col].cell,row-1,col,dimension);
+				this.Expand(cell,row-1,col,dimension);
 				if(col > 0){
-					element.field.Expand(this.arr[row-1][col-1].cell,row-1,col-1,dimension);
+					this.Expand(cell,row-1,col-1,dimension);
 				}
 				if(col > dimension-1){
-					element.field.Expand(this.arr[row-1][col+1].cell,row-1,col+1,dimension);
+					this.Expand(cell,row-1,col+1,dimension);
 				}
 			}
 			if(col > 0){
-				element.field.Expand(this.arr[row][col-1].cell,row,col-1,dimension);
+				this.Expand(cell,row,col-1,dimension);
 			}
 			if(col < dimension-1){
-				element.field.Expand(this.arr[row][col+1].cell,row,col+1,dimension);
+				this.Expand(cell,row,col+1,dimension);
 			}
 			if(row < dimension-1){
-				element.field.Expand(this.arr[row+1][col].cell,row + 1,col,dimension);
+				this.Expand(cell,row + 1,col,dimension);
 				if(col > 0){
-					element.field.Expand(this.arr[row+1][col-1].cell,row+1,col-1,dimension);
+					this.Expand(cell,row+1,col-1,dimension);
 				}
 				if(col > dimension-1){
-					element.field.Expand(this.arr[row+1][col+1].cell,row+1,col+1,dimension);
+					this.Expand(cell,row+1,col+1,dimension);
 				}
 			}
 		}
