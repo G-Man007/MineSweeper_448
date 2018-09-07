@@ -34,7 +34,6 @@ function drawBoard(dimension, bombsLeft){
        }
        return grid;
      }
-
      function placeBombs(rows, cols, bombsLeft){
        if(bombsLeft > 0){
         return(Math.random() <= (bombsLeft / cellsLeft));
