@@ -1,16 +1,19 @@
+
+let cell = [];
 function drawBoard(dimension, bombsLeft){
-     let lastClicked;
-     let cellsLeft = dimension * dimension;
+	if(cell != []){
 
-     let grid = clickableGrid(dimension,dimension,function(element,row,col,i,isBomb){
-       element.className = 'clicked';
-       if(element.isBomb == true){
-         element.className = 'bomb';
-       }
-     });
+	}
+	let lastClicked;
+	let field = new mineField(dimension, dimension, bombsLeft);
 
-     document.body.appendChild(grid);
+    let cellsLeft = dimension * dimension;
 
+    let grid = clickableGrid(dimension,dimension,function(element,row,col,i){
+		element.field.Click(cell,row,col,i,dimension);
+	});
+
+<<<<<<< HEAD:assets/js/drawBoard.js
      function clickableGrid( rows, cols, callback ){
        let i=0;
        let grid = document.createElement('table');
@@ -44,4 +47,28 @@ function drawBoard(dimension, bombsLeft){
      {
 
      }
+=======
+    document.body.appendChild(grid);
+
+	function clickableGrid( rows, cols, callback ){
+    	let i=0;
+        let grid = document.createElement('table');
+        grid.className = 'grid';
+        for (let r=0; r<rows; r++){
+        	let tr = grid.appendChild(document.createElement('tr')); //creates a new row for each r value
+			cell.push([0]);
+            for (let c=0; c<cols; c++){
+            	cell[r][c] = tr.appendChild(document.createElement('td')); //creates a new table data cell in the current row for each column
+                cell[r][c].field = field;
+                cell[r][c].addEventListener('click',(function(element,r,c,i){ //on a click it creates a function scope for all of the local variables for a cell
+                	return function(){
+                    	callback(element,r,c,i); //function that allows refernce to specific instance by creating closure
+                    }
+                })(cell[r][c],r,c,i),false);
+				field.arr[r][c].cell = cell[r][c];
+        	}
+        }
+        return grid;
+	}
+>>>>>>> master:assets/drawBoard.js
 }

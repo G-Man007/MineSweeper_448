@@ -11,3 +11,6 @@
 .grid td.clicked {
   background-color:grey;
 }
+.grid td.bomb {
+  background-color:red;
+}
