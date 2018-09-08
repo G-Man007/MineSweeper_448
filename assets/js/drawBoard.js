@@ -40,4 +40,8 @@ function drawBoard(dimension, bombsLeft){
       }
       return false;
      }
+     function game(let rows,let cols,)
+     {
+
+     }
 }
