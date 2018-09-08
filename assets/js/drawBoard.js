@@ -36,5 +36,5 @@ function drawBoard(dimension, bombsLeft){
         }
         return grid;
 	}
->>>>>>> master:assets/drawBoard.js
+  assets/drawBoard.js
 }
