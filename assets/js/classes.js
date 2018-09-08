@@ -99,4 +99,15 @@ class mineField {
 			}
 		}//recursively calls for it to go out to all squares if there is no mine near it
 	}
+	show(cell,row,col)
+	{
+		if(cell[row][col].className == 'bomb')
+		{
+			//return number of bombs adjacent from expanded squares
+		}
+		else
+		{
+			//keep looking in tell bombs are hit
+		}
+	}
 }
