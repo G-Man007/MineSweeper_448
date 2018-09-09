@@ -1,3 +1,13 @@
+/*.navbar-default {
+    background-color: #2b2d30;
+    border-color: #E7E7E7;
+}*/
+.btn-success {
+  margin: 12%;
+}
+.navbar-text{
+    color: white;
+}
 .grid {
   margin:1em auto; border-collapse:collapse
 }
@@ -10,4 +20,7 @@
 }
 .grid td.clicked {
   background-color:grey;
+}
+.grid td.bomb {
+  background-color:red;
 }
