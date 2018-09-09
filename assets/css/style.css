@@ -1,13 +1,3 @@
-/*.navbar-default {
-    background-color: #2b2d30;
-    border-color: #E7E7E7;
-}*/
-.btn-success {
-  margin: 12%;
-}
-.navbar-text{
-    color: white;
-}
 .grid {
   margin:1em auto; border-collapse:collapse
 }
@@ -21,6 +11,42 @@
 .grid td.clicked {
   background-color:grey;
 }
+
 .grid td.bomb {
   background-color:red;
 }
+
+/* navbar */
+input {
+  width: 60px !important;
+}
+
+label {
+  color: white;
+  margin: 35px 20px;
+}
+
+button {
+  margin: 28px 20px;
+}
+
+.navbar-brand {
+  color: white !important;
+  /*text-align: left !important;*/
+  font-size: 220% !important;
+  margin: 20px 0px;
+}
+
+.flags {
+  color: white !important;
+  font-size: 130%;
+  margin: 21px 20px;
+  font-weight: bold;
+}
+
+/*@media screen and (min-width: 48em){ /*modify later for smaller screens
+  .navbar-brand{
+    color: green !important;
+  }
+}*/
+/* /navbar */

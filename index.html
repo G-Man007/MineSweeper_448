@@ -11,27 +11,40 @@
 </head>
 <body>
   <nav class="navbar navbar-inverse">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" href="#">MineSweeper</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/">Flags left</a></li>
-        <li><a href="/articles">Bomb number</a></li>
-        <li><a href="/">Board size</a></li>
-        <li><button type="button" onclick="drawBoard(5, 5);">Reset</button></li>
+        <li><a class="flags" href="/">Flags left</a></li>
+        <li>
+          <form class="form-inline" action="action_page.php">
+            <div class="form-group">
+              <label for="bombs">Bomb number</label>
+              <input class="form-control" type="number" value="10">
+            </div>
+            <div class="form-group">
+              <label for="board">Board size (NxN)</label>
+              <input class="form-control" type="number" value="10">
+            </div>
+          </form>
+        </li>
+        <li><button type="button" onclick="drawBoard(5,5);" id="btn-success">Reset</button></li>
+        <script>
+          let button = document.getElementById('btn-success');
+          let pressed = false;
+          button.addEventListener("click", function(event){
+            pressed = true;
+          });
+        </script>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
+
+
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </html>
