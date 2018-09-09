@@ -21,14 +21,18 @@
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="/">Flags left</a></li>
-        <li><a href="/articles">Bomb number</a>
-          <div class="form-group row">
-          <label for="example-number-input" class="row-2 row-form-label">Bomb number</label>
-            <div class="row-10">
-              <input class="form-control" type="number" value="10" id="example-number-input">
+        <li>
+          <form class="form-inline" action="action_page.php">
+            <div class="form-group">
+              <label for="bombs">Bomb number</label>
+              <input class="form-control" type="number" value="10">
             </div>
-          </div></li>
-        <li><a href="/">Board size</a></li>
+            <div class="form-group">
+              <label for="board">Board size (NxN)</label>
+              <input class="form-control" type="number" value="10">
+            </div>
+          </form>
+        </li>
         <li><button type="button" class="btn btn-success">Reset</button></li>
       </ul>
     </div><!--/.nav-collapse -->
