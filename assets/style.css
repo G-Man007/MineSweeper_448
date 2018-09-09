@@ -1,32 +1,49 @@
-.navbar-brand{ /*Minesweeper title text*/
-  color: white !important;
-  font-size: 200%;
-  margin-left: -300px !important;
+.grid {
+  margin:1em auto; border-collapse:collapse
+}
+.grid td {
+  cursor:pointer;
+  width:30px; height:30px;
+  border:1px solid #ccc;
+  text-align:center;
+  font-family:sans-serif; font-size:13px
+}
+.grid td.clicked {
+  background-color:grey;
 }
 
-.navbar-nav a{ /*settings text*/
-  color: white !important;
-}
 
-.btn-success { /*reset button*/
-  margin: 12%;
-}
-
-.navbar-text {
-    color: white;
-}
-
+/* navbar */
 input {
-  width:25% !important;
-  margin: 3%;
-  padding: 0 0 !important;
-}
-
-li, form {
-  display: inline !important;
+  width: 60px !important;
 }
 
 label {
   color: white;
-  margin: center;
+  margin: 35px 20px;
 }
+
+button {
+  margin: 28px 20px;
+}
+
+.navbar-brand {
+  color: white !important;
+  /*text-align: left !important;*/
+  font-size: 220% !important;
+  margin: 20px 0px;
+}
+
+.flags {
+  color: white !important;
+  font-size: 130%;
+  margin: 21px 20px;
+  font-weight: bold;
+}
+
+/*@media screen and (min-width: 48em){ /*modify later for smaller screens
+  .navbar-brand{
+    color: green !important;
+  }
+}*/
+/* /navbar */

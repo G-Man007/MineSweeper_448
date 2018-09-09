@@ -1,0 +1,31 @@
+.navbar-brand{ /*Minesweeper title text*/
+  color: white !important;
+  font-size: 200%;
+  margin-left: -300px !important;
+}
+
+.navbar-nav a{ /*settings text*/
+  color: white !important;
+}
+
+.btn-success { /*reset button*/
+  margin: 12%;
+}
+.navbar-text{
+    color: white;
+}
+
+input {
+  width:25% !important;
+  margin: 3%;
+  padding: 0 0 !important;
+}
+
+li, form {
+  display: inline !important;
+}
+
+label {
+  color: white;
+  margin: center;
+}
