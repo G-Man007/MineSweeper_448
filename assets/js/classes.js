@@ -13,44 +13,21 @@ class mineField {
 		this.flags = numBombs;
         this.arr = [];
 		let cells = height * width;
+		let cellsLeft = height * width;
         for(let i = 0; i < width; i++){
             this.arr.push([0]);
             for(let j = 0; j < height; j++){
                 this.arr[i][j] = new Tile();
-				/*if(Math.floor(Math.random() * 3) == 1){
-					this.arr[i][j] = true;
-					if(i > 0){
-						this.arr[i-1][j].adjminenum++;
-						if(j > 0){
-							this.arr[i-1][j-1].adjminenum++;
-						}
-						if(j > dimension-1){
-							this.arr[i-1][j+1].adjminenum++;
-						}
-					}
-					if(j > 0){
-						this.arr[i][j-1].adjminenum++;
-					}
-					if(j < dimension-1){
-						this.arr[i][j+1].adjminenum++;
-					}
-					if(i < dimension-1){
-						this.arr[i+1][j].adjminenum++;
-						if(j > 0){
-							this.arr[i+1][j-1].adjminenum++;
-						}
-						if(j > dimension-1){
-							this.arr[i+1][j+1].adjminenum++;
-						}
-					}
-				}*/
             }
+			for(let j = 0; j < height; j++){
+				this.arr[i][j].mine = this.placeBombs(numBombs,cellsLeft);
+				cellsLeft--;
+				if(this.arr[i][j].mine == true){
+						numBombs--;
+				}
+			}
         }//populates the array couldn't get adding mines to work
-		this.arr[3][1].mine = true;
-		this.arr[3][2].mine = true;
-		this.arr[3][3].mine = true;
-		this.arr[3][4].mine = true;
-		this.arr[3][0].mine = true;
+
     }
 	Click(cell,row,col,i,dimension){
 		if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
@@ -98,5 +75,11 @@ class mineField {
 				}
 			}
 		}//recursively calls for it to go out to all squares if there is no mine near it
+	}
+	placeBombs(bombsLeft, cellsLeft){
+		if(bombsLeft > 0){
+		 return(Math.random() <= (bombsLeft / cellsLeft));
+	   }
+	   return false;
 	}
 }
