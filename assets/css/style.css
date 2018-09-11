@@ -11,6 +11,9 @@
 .grid td.clicked {
   background-color:grey;
 }
+.grid td.num {
+  background-color:blue;
+}
 .grid td.bomb {
   background-color:red;
 }

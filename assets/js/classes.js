@@ -46,12 +46,38 @@ class mineField {
 				}*/
             }
         }//populates the array couldn't get adding mines to work
-		this.arr[3][1].mine = true;
-		this.arr[3][2].mine = true;
-		this.arr[3][3].mine = true;
-		this.arr[3][4].mine = true;
-		this.arr[3][0].mine = true;
+		this.numberField(height);
     }
+		numberField(dimension)
+		{
+			for(let i=0;i<dimension;i++)
+			{
+				for(let j=0;j<dimension;j++)
+				{
+					for(let h=i-1;h<=i+1;h++)
+					{
+						for(let k=j-1;k<=j+1;k++)
+						{
+							if(h>=0 && k>=0)
+							{
+								if(h<dimension && k<dimension)
+								{
+									if(this.arr[h][k].mine==true)
+									{
+										this.arr[i][j].adjminenum++;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+		}
+		number(dimension)
+		{
+
+		}
 	Click(cell,row,col,i,dimension){
 		if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
 			this.Expand(cell,row,col,dimension);
@@ -98,16 +124,5 @@ class mineField {
 				}
 			}
 		}//recursively calls for it to go out to all squares if there is no mine near it
-	}
-	show(cell,row,col)
-	{
-		if(cell[row][col].className == 'bomb')
-		{
-			//return number of bombs adjacent from expanded squares
-		}
-		else
-		{
-			//keep looking in tell bombs are hit
-		}
 	}
 }
