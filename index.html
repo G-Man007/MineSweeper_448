@@ -27,21 +27,26 @@
           <form class="form-inline" action="action_page.php">
             <div class="form-group">
               <label for="bombs">Bomb number</label>
-              <input class="form-control" type="number" value="10">
+              <input class="form-control" type="number" id="bombsInput" value="10">
             </div>
             <div class="form-group">
               <label for="board">Board size (NxN)</label>
-              <input class="form-control" type="number" value="10">
+              <input class="form-control" type="number" id="boardInput" value="10">
             </div>
           </form>
         </li>
         <li><button type="button" id="btn-success">Reset</button></li>
         <script>
-          let button = document.getElementById('btn-success');
-          let pressed = false;
-          button.addEventListener("click", function(event){
-            pressed = true;
-            drawBoard(10,10);
+
+            let button = document.getElementById('btn-success');
+
+            let pressed = false;
+
+            button.addEventListener("click", function(event){
+                    let bombs = document.getElementById('bombsInput');
+                    let board = document.getElementById('boardInput');
+                    console.log(bombs.value);
+                    console.log(board.value);
           });
         </script>
       </ul>
