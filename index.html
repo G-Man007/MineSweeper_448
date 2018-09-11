@@ -39,14 +39,37 @@
         <script>
 
             let button = document.getElementById('btn-success');
-
             let pressed = false;
+
+            var url_string = window.location.href
+            var url = new URL(url_string);
+            var parameters = url.searchParams.get("parameter");
+            if(parameters){
+                var arr = parameters.split(",");
+                pressed = true;
+                console.log(arr);
+            }
 
             button.addEventListener("click", function(event){
                     let bombs = document.getElementById('bombsInput');
                     let board = document.getElementById('boardInput');
-                    console.log(bombs.value);
-                    console.log(board.value);
+                    if(pressed){
+                        arr[0] = bombs.value;
+                        arr[1] = board.value;
+                        drawBoard(arr[1],arr[0]);
+                        pressed = false;
+                        button.addEventListener("click", function(event){
+                        window.location.href =  document.referrer + "?&parameter=" + bombs.value + ',' + board.value;
+                    });
+                    }
+                    else{
+                        console.log(bombs.value);
+                        console.log(board.value);
+                        drawBoard(board.value, bombs.value);
+                        button.addEventListener("click", function(event){
+                        window.location.search += "&parameter=" + bombs.value + ',' + board.value;
+                    });
+                    }
           });
         </script>
       </ul>
