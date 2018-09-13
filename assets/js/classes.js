@@ -27,37 +27,36 @@ class mineField {
 				}
 			}
         }//populates the array couldn't get adding mines to work
-		this.numberField(height);
+		this.numberField(height,width);
     }
 	numberField(height,width)
 	{
-		for(let i=0;i<height;i++)
+		for(let i=0; i<height; i++)
 		{
-			for(let j=0;j<width;j++)
+			for(let j=0; j<width; j++)
 			{
 				if(this.arr[i][j].mine){
-					this.arr[i][j] = true;
 					if(i > 0){
 						this.arr[i-1][j].adjminenum++;
 						if(j > 0){
 							this.arr[i-1][j-1].adjminenum++;
 						}
-						if(j > dimension-1){
+						if(j < width-1){
 							this.arr[i-1][j+1].adjminenum++;
 						}
 					}
 					if(j > 0){
 						this.arr[i][j-1].adjminenum++;
 					}
-					if(j < dimension-1){
+					if(j < width-1){
 						this.arr[i][j+1].adjminenum++;
 					}
-					if(i < dimension-1){
+					if(i < height-1){
 						this.arr[i+1][j].adjminenum++;
 						if(j > 0){
 							this.arr[i+1][j-1].adjminenum++;
 						}
-						if(j > dimension-1){
+						if(j < width-1){
 							this.arr[i+1][j+1].adjminenum++;
 						}
 					}
@@ -118,7 +117,7 @@ class mineField {
 				if(col > 0){
 					this.Expand(cell,row-1,col-1,dimension);
 				}
-				if(col > dimension-1){
+				if(col < dimension-1){
 					this.Expand(cell,row-1,col+1,dimension);
 				}
 			}
@@ -133,7 +132,7 @@ class mineField {
 				if(col > 0){
 					this.Expand(cell,row+1,col-1,dimension);
 				}
-				if(col > dimension-1){
+				if(col < dimension-1){
 					this.Expand(cell,row+1,col+1,dimension);
 				}
 			}
