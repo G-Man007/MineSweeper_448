@@ -68,7 +68,10 @@ class mineField {
 	{
 	}
 	Click(cell,row,col,i,dimension){
-		if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
+		if(this.arr[row][col].mine == true){
+			cell[row][col].className = 'bomb';
+		}
+		else if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
 			this.Expand(cell,row,col,i,dimension);
 		}
 		else if(this.arr[row][col].adjminenum == 1 && this.arr[row][col].mine != true){
@@ -94,9 +97,6 @@ class mineField {
 		}
 		else if(this.arr[row][col].adjminenum == 8 && this.arr[row][col].mine != true){
 			cell[row][col].className = 'clicked8';
-		}
-		else if(this.arr[row][col].mine == true){
-			cell[row][col].className = 'bomb';
 		}//need statements for if the adjacent mines are >0 but works now
 	}
 	Flag(x,y) {
@@ -107,38 +107,40 @@ class mineField {
 		}
 	}
 	Expand(cell, row, col, i, dimension) {
-		if(cell[row][col].className == 'clicked'){
+		if(cell[row][col].className == 'clicked' || cell[row][col].className == 'clicked1'|| cell[row][col].className == 'clicked2' || cell[row][col].className == 'clicked3'|| cell[row][col].className == 'clicked4'|| cell[row][col].className == 'clicked5'
+		 || cell[row][col].className == 'clicked6' || cell[row][col].className == 'clicked7' || cell[row][col].className =='clicked8'){
 			return;
-		}//temporary until we get adjacent mine numbers working
+		}
 		if(this.arr[row][col].adjminenum == 0 && !(this.arr[row][col].mine)){
 			cell[row][col].className = 'clicked';
 			if(row > 0){
-				this.Expand(cell,row-1,col,dimension);
+				this.Expand(cell,row-1,col,i,dimension);
 				if(col > 0){
-					this.Expand(cell,row-1,col-1,dimension);
+					this.Expand(cell,row-1,col-1,i,dimension);
 				}
 				if(col < dimension-1){
-					this.Expand(cell,row-1,col+1,dimension);
+					this.Expand(cell,row-1,col+1,i,dimension);
 				}
 			}
 			if(col > 0){
-				this.Expand(cell,row,col-1,dimension);
+				this.Expand(cell,row,col-1,i,dimension);
 			}
 			if(col < dimension-1){
-				this.Expand(cell,row,col+1,dimension);
+				this.Expand(cell,row,col+1,i,dimension);
 			}
 			if(row < dimension-1){
-				this.Expand(cell,row + 1,col,dimension);
+				this.Expand(cell,row + 1,col,i,dimension);
 				if(col > 0){
-					this.Expand(cell,row+1,col-1,dimension);
+					this.Expand(cell,row+1,col-1,i,dimension);
 				}
 				if(col < dimension-1){
-					this.Expand(cell,row+1,col+1,dimension);
+					this.Expand(cell,row+1,col+1,i,dimension);
 				}
 			}
 		}//recursively calls for it to go out to all squares if there is no mine near it
-		else {
-			this.click(cell, row, col, i, dimension);
+		else if(!(this.arr[row][col].mine)) {
+			this.Click(cell, row, col, i, dimension);
+			return;
 		}
 	}
 	placeBombs(bombsLeft, cellsLeft){
