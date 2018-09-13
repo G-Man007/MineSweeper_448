@@ -46,15 +46,41 @@ class mineField {
 				}*/
             }
         }//populates the array couldn't get adding mines to work
-		this.arr[3][1].mine = true;
-		this.arr[3][2].mine = true;
-		this.arr[3][3].mine = true;
-		this.arr[3][4].mine = true;
-		this.arr[3][0].mine = true;
+		this.numberField(height);
     }
+		numberField(dimension)
+		{
+			for(let i=0;i<dimension;i++)
+			{
+				for(let j=0;j<dimension;j++)
+				{
+					for(let h=i-1;h<=i+1;h++)
+					{
+						for(let k=j-1;k<=j+1;k++)
+						{
+							if(h>=0 && k>=0)
+							{
+								if(h<dimension && k<dimension)
+								{
+									if(this.arr[h][k].mine==true)
+									{
+										this.arr[i][j].adjminenum++;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+		}
+		number(dimension)
+		{
+
+		}
 	Click(cell,row,col,i,dimension){
 		if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
-			this.Expand(cell,row,col,dimension);
+			this.Expand(cell,row,col,i,dimension);
 		}
 		else if(this.arr[row][col].adjminenum == 1 && this.arr[row][col].mine != true){
 			cell[row][col].className = 'clicked1';
@@ -91,7 +117,7 @@ class mineField {
 
 		}
 	}
-	Expand(cell, row, col, dimension) {
+	Expand(cell, row, col, i, dimension) {
 		if(cell[row][col].className == 'clicked'){
 			return;
 		}//temporary until we get adjacent mine numbers working
@@ -122,5 +148,8 @@ class mineField {
 				}
 			}
 		}//recursively calls for it to go out to all squares if there is no mine near it
+		else {
+			this.click(cell, row, col, i, dimension);
+		}
 	}
 }

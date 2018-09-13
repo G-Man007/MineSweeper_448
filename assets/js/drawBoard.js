@@ -1,4 +1,3 @@
-
 let cell = null;
 let grid = null;
 function drawBoard(dimension, bombsLeft){
