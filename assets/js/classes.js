@@ -13,11 +13,29 @@ class mineField {
 		this.flags = numBombs;
         this.arr = [];
 		let cells = height * width;
+		let cellsLeft = height * width;
         for(let i = 0; i < width; i++){
             this.arr.push([0]);
             for(let j = 0; j < height; j++){
                 this.arr[i][j] = new Tile();
-				/*if(Math.floor(Math.random() * 3) == 1){
+            }
+			for(let j = 0; j < height; j++){
+				this.arr[i][j].mine = this.placeBombs(numBombs,cellsLeft);
+				cellsLeft--;
+				if(this.arr[i][j].mine == true){
+						numBombs--;
+				}
+			}
+        }//populates the array couldn't get adding mines to work
+		this.numberField(height);
+    }
+	numberField(height,width)
+	{
+		for(let i=0;i<height;i++)
+		{
+			for(let j=0;j<width;j++)
+			{
+				if(this.arr[i][j].mine){
 					this.arr[i][j] = true;
 					if(i > 0){
 						this.arr[i-1][j].adjminenum++;
@@ -43,41 +61,13 @@ class mineField {
 							this.arr[i+1][j+1].adjminenum++;
 						}
 					}
-				}*/
-            }
-        }//populates the array couldn't get adding mines to work
-		this.numberField(height);
-    }
-		numberField(dimension)
-		{
-			for(let i=0;i<dimension;i++)
-			{
-				for(let j=0;j<dimension;j++)
-				{
-					for(let h=i-1;h<=i+1;h++)
-					{
-						for(let k=j-1;k<=j+1;k++)
-						{
-							if(h>=0 && k>=0)
-							{
-								if(h<dimension && k<dimension)
-								{
-									if(this.arr[h][k].mine==true)
-									{
-										this.arr[i][j].adjminenum++;
-									}
-								}
-							}
-						}
-					}
 				}
 			}
-
 		}
-		number(dimension)
-		{
-
-		}
+	}
+	number(dimension)
+	{
+	}
 	Click(cell,row,col,i,dimension){
 		if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
 			this.Expand(cell,row,col,i,dimension);
@@ -151,5 +141,11 @@ class mineField {
 		else {
 			this.click(cell, row, col, i, dimension);
 		}
+	}
+	placeBombs(bombsLeft, cellsLeft){
+		if(bombsLeft > 0){
+		 return(Math.random() <= (bombsLeft / cellsLeft));
+	   }
+	   return false;
 	}
 }
