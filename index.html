@@ -39,45 +39,29 @@
         <script>
 
             let button = document.getElementById('btn-success');
-            let pressed = false;
 
-            var url_string = window.location.href
-            var url = new URL(url_string);
-            var parameters = url.searchParams.get("parameter");
-            if(parameters){
-                var arr = parameters.split(",");
-                pressed = true;
-                console.log(arr);
-            }
+            function load(){
 
-            button.addEventListener("click", function(event){
+                let pressed = false;
                     let bombs = document.getElementById('bombsInput');
                     let board = document.getElementById('boardInput');
-                    if(pressed){
-                        arr[0] = bombs.value;
-                        arr[1] = board.value;
-                        drawBoard(arr[1],arr[0]);
-                        pressed = false;
-                        button.addEventListener("click", function(event){
-                        window.location.href =  document.referrer + "?&parameter=" + bombs.value + ',' + board.value;
-                    });
-                    }
-                    else{
-                        console.log(bombs.value);
-                        console.log(board.value);
+                    console.log(bombs.value);
+                    console.log(board.value);
+                    drawBoard(board.value, bombs.value);
+                }
+
+            button.addEventListener("click", function(event){
+                        deleteBoard();
+                        bombs = document.getElementById('bombsInput');
+                        board = document.getElementById('boardInput');
                         drawBoard(board.value, bombs.value);
-                        button.addEventListener("click", function(event){
-                        window.location.search += "&parameter=" + bombs.value + ',' + board.value;
-                    });
-                    }
           });
         </script>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-
-
+    <body onload ="load()" </body>
 </body>
 <script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
