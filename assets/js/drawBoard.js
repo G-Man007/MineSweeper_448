@@ -1,23 +1,21 @@
-
-let cell = [];
+let cell = null;
+let grid = null;
 function drawBoard(dimension, bombsLeft){
-	if(cell != []){
 
-	}
+	cell = [];
 	let lastClicked;
 	let field = new mineField(dimension, dimension, bombsLeft);
 
     let cellsLeft = dimension * dimension;
 
-    let grid = clickableGrid(dimension,dimension,function(element,row,col,i){
+    let tab = clickableGrid(dimension,dimension,function(element,row,col,i){
 		element.field.Click(cell,row,col,i,dimension);
 	});
 
     document.body.appendChild(grid);
-
 	function clickableGrid( rows, cols, callback ){
     	let i=0;
-        let grid = document.createElement('table');
+        grid = document.createElement('table');
         grid.className = 'grid';
         for (let r=0; r<rows; r++){
         	let tr = grid.appendChild(document.createElement('tr')); //creates a new row for each r value
@@ -34,5 +32,10 @@ function drawBoard(dimension, bombsLeft){
         	}
         }
         return grid;
+	}
+}
+function deleteBoard(rows, cols){
+	if(grid != null){
+		document.body.removeChild(grid);
 	}
 }
