@@ -71,32 +71,33 @@ class mineField {
 				cell[row][col].className = 'bomb';
 				this.ShowBombs(cell, height, width);
 				this.endgame = true;
+				window.alert("You Lose");
 			}
-			else if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 0){
 				this.Expand(cell,row,col,i,height, width);
 			}
-			else if(this.arr[row][col].adjminenum == 1 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 1){
 				cell[row][col].className = 'clicked1';
 			}
-			else if(this.arr[row][col].adjminenum == 2 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 2){
 				cell[row][col].className = 'clicked2';
 			}
-			else if(this.arr[row][col].adjminenum == 3 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 3){
 				cell[row][col].className = 'clicked3';
 			}
-			else if(this.arr[row][col].adjminenum == 4 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 4){
 				cell[row][col].className = 'clicked4';
 			}
-			else if(this.arr[row][col].adjminenum == 5 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 5){
 				cell[row][col].className = 'clicked5';
 			}
-			else if(this.arr[row][col].adjminenum == 6 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 6){
 				cell[row][col].className = 'clicked6';
 			}
-			else if(this.arr[row][col].adjminenum == 7 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 7){
 				cell[row][col].className = 'clicked7';
 			}
-			else if(this.arr[row][col].adjminenum == 8 && this.arr[row][col].mine != true){
+			else if(this.arr[row][col].adjminenum == 8){
 				cell[row][col].className = 'clicked8';
 			}//need statements for if the adjacent mines are >0 but works now
 		}
@@ -156,8 +157,8 @@ class mineField {
 	}
 	placeBombs(bombsLeft, cellsLeft){
 		if(bombsLeft > 0){
-		 return(Math.random() <= (bombsLeft / cellsLeft));
-	   }
-	   return false;
+			return(Math.random() <= (bombsLeft / cellsLeft));
+		}
+		return false;
 	}
 }
