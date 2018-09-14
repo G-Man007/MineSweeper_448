@@ -65,10 +65,12 @@ class mineField {
 			}
 		}
 	}
-	Click(cell,row,col,i,height, width){
+	Click(cell,row,col,i, height, width){
 		if(!(this.endgame)){
 			if(this.arr[row][col].mine == true){
 				cell[row][col].className = 'bomb';
+				this.ShowBombs(cell, height, width);
+				this.endgame = true;
 			}
 			else if(this.arr[row][col].adjminenum == 0 && this.arr[row][col].mine != true){
 				this.Expand(cell,row,col,i,height, width);
@@ -99,8 +101,14 @@ class mineField {
 			}//need statements for if the adjacent mines are >0 but works now
 		}
 	}
-	ShowBombs(height, width){
-
+	ShowBombs(cell, height, width){
+		for(let i = 0; i<height; i++){
+			for(let j = 0; j<width; j++){
+				if(this.arr[i][j].mine){
+					cell[i][j].className = 'bomb';
+				}
+			}
+		}
 	}
 	Flag(x,y) {
 		this.arr[x][y].flag = true;
