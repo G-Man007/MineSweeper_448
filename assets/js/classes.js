@@ -15,18 +15,17 @@ class mineField {
 		this.endgame = false;
 		let cells = height * width;
 		let cellsLeft = height * width;
-        for(let i = 0; i < width; i++){
+
+        for(let i = 0; i < height; i++){
             this.arr.push([0]);
-            for(let j = 0; j < height; j++){
+            for(let j = 0; j < width; j++){
                 this.arr[i][j] = new Tile();
-            }
-			for(let j = 0; j < height; j++){
 				this.arr[i][j].mine = this.placeBombs(numBombs,cellsLeft);
 				cellsLeft--;
 				if(this.arr[i][j].mine == true){
 						numBombs--;
 				}
-			}
+            }
         }//populates the array couldn't get adding mines to work
 		this.numberField();
     }
