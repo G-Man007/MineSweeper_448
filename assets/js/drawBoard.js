@@ -7,15 +7,15 @@ let grid = null;
  * @param {int} title - The side length of the grid.
  * @param {int} bombsLeft - The amount of bombs to be placed in the grid.
  */
- function drawBoard(height, width, bombsLeft){
+function drawBoard(height, width, bombsLeft){
 
- 	cell = [];
+	cell = [];
  	let lastClicked;
  	let field = new mineField(height, width, bombsLeft);
 
 
     let tab = clickableGrid(height, width,function(element,row,col,i){
- 		element.field.Click(cell,row,col,i,height, width);
+ 		element.field.Click(cell,row,col);
  	});
 
 	document.body.appendChild(grid);
@@ -39,9 +39,9 @@ let grid = null;
          }
          return grid;
  	}
- }
- function deleteBoard(){
- 	if(grid != null){
+}
+function deleteBoard(){
+	if(grid != null){
  		document.body.removeChild(grid);
  	}
- }
+}

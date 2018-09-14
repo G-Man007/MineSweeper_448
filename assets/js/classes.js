@@ -28,13 +28,13 @@ class mineField {
 				}
 			}
         }//populates the array couldn't get adding mines to work
-		this.numberField(height,width);
+		this.numberField();
     }
-	numberField(height,width)
+	numberField()
 	{
-		for(let i=0; i<height; i++)
+		for(let i=0; i<this.height; i++)
 		{
-			for(let j=0; j<width; j++)
+			for(let j=0; j<this.width; j++)
 			{
 				if(this.arr[i][j].mine){
 					if(i > 0){
@@ -42,22 +42,22 @@ class mineField {
 						if(j > 0){
 							this.arr[i-1][j-1].adjminenum++;
 						}
-						if(j < width-1){
+						if(j < this.width-1){
 							this.arr[i-1][j+1].adjminenum++;
 						}
 					}
 					if(j > 0){
 						this.arr[i][j-1].adjminenum++;
 					}
-					if(j < width-1){
+					if(j < this.width-1){
 						this.arr[i][j+1].adjminenum++;
 					}
-					if(i < height-1){
+					if(i < this.height-1){
 						this.arr[i+1][j].adjminenum++;
 						if(j > 0){
 							this.arr[i+1][j-1].adjminenum++;
 						}
-						if(j < width-1){
+						if(j < this.width-1){
 							this.arr[i+1][j+1].adjminenum++;
 						}
 					}
@@ -65,16 +65,16 @@ class mineField {
 			}
 		}
 	}
-	Click(cell,row,col,i, height, width){
+	Click(cell,row,col){
 		if(!(this.endgame)){
 			if(this.arr[row][col].mine == true){
 				cell[row][col].className = 'bomb';
-				this.ShowBombs(cell, height, width);
+				this.ShowBombs(cell);
 				this.endgame = true;
 				window.alert("You Lose\nClick reset to try again");
 			}
 			else if(this.arr[row][col].adjminenum == 0){
-				this.Expand(cell,row,col,i,height, width);
+				this.Expand(cell,row,col);
 			}
 			else if(this.arr[row][col].adjminenum == 1){
 				cell[row][col].className = 'clicked1';
@@ -102,9 +102,9 @@ class mineField {
 			}//need statements for if the adjacent mines are >0 but works now
 		}
 	}
-	ShowBombs(cell, height, width){
-		for(let i = 0; i<height; i++){
-			for(let j = 0; j<width; j++){
+	ShowBombs(cell){
+		for(let i = 0; i<this.height; i++){
+			for(let j = 0; j<this.width; j++){
 				if(this.arr[i][j].mine){
 					cell[i][j].className = 'bomb';
 				}
@@ -129,40 +129,40 @@ class mineField {
 		window.alert("You Win\nClick reset to play again");
 		this.endgame = true;
 	}
-	Expand(cell, row, col, i, height, width) {
+	Expand(cell, row, col) {
 		if(cell[row][col].className == 'clicked' || cell[row][col].className == 'clicked1'|| cell[row][col].className == 'clicked2' || cell[row][col].className == 'clicked3'|| cell[row][col].className == 'clicked4'|| cell[row][col].className == 'clicked5'
-		 || cell[row][col].className == 'clicked6' || cell[row][col].className == 'clicked7' || cell[row][col].className =='clicked8'){
+			|| cell[row][col].className == 'clicked6' || cell[row][col].className == 'clicked7' || cell[row][col].className =='clicked8'){
 			return;
 		}
 		if(this.arr[row][col].adjminenum == 0 && !(this.arr[row][col].mine)){
 			cell[row][col].className = 'clicked';
 			if(row > 0){
-				this.Expand(cell,row-1,col,i,height, width);
+				this.Expand(cell,row-1,col);
 				if(col > 0){
-					this.Expand(cell,row-1,col-1,i,height, width);
+					this.Expand(cell,row-1,col-1);
 				}
-				if(col < width-1){
-					this.Expand(cell,row-1,col+1,i,height, width);
+				if(col < this.width-1){
+					this.Expand(cell,row-1,col+1);
 				}
 			}
 			if(col > 0){
-				this.Expand(cell,row,col-1,i,height, width);
+				this.Expand(cell,row,col-1);
 			}
-			if(col < width-1){
-				this.Expand(cell,row,col+1,i,height, width);
+			if(col < this.width-1){
+				this.Expand(cell,row,col+1);
 			}
-			if(row < height-1){
-				this.Expand(cell,row + 1,col,i,height, width);
+			if(row < this.height-1){
+				this.Expand(cell,row + 1,col);
 				if(col > 0){
-					this.Expand(cell,row+1,col-1,i,height, width);
+					this.Expand(cell,row+1,col-1);
 				}
-				if(col < width-1){
-					this.Expand(cell,row+1,col+1,i,height, width);
+				if(col < this.width-1){
+					this.Expand(cell,row+1,col+1);
 				}
 			}
 		}//recursively calls for it to go out to all squares if there is no mine near it
 		else if(!(this.arr[row][col].mine)) {
-			this.Click(cell, row, col, i, height, width);
+			this.Click(cell, row, col);
 			return;
 		}
 	}
