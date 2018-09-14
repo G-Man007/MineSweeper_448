@@ -7,19 +7,18 @@ let grid = null;
  * @param {int} title - The side length of the grid.
  * @param {int} bombsLeft - The amount of bombs to be placed in the grid.
  */
- function drawBoard(dimension, bombsLeft){
+ function drawBoard(height, width, bombsLeft){
 
  	cell = [];
  	let lastClicked;
- 	let field = new mineField(dimension, dimension, bombsLeft);
+ 	let field = new mineField(height, width, bombsLeft);
 
-     let cellsLeft = dimension * dimension;
 
-     let tab = clickableGrid(dimension,dimension,function(element,row,col,i){
- 		element.field.Click(cell,row,col,i,dimension);
+    let tab = clickableGrid(height, width,function(element,row,col,i){
+ 		element.field.Click(cell,row,col,i,height, width);
  	});
 
-     document.body.appendChild(grid);
+	document.body.appendChild(grid);
  	function clickableGrid( rows, cols, callback ){
      	let i=0;
          grid = document.createElement('table');
@@ -41,7 +40,7 @@ let grid = null;
          return grid;
  	}
  }
- function deleteBoard(rows, cols){
+ function deleteBoard(){
  	if(grid != null){
  		document.body.removeChild(grid);
  	}
