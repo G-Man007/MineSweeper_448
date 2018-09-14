@@ -23,7 +23,7 @@ class mineField {
 				this.arr[i][j].mine = this.placeBombs(numBombs,cellsLeft);
 				cellsLeft--;
 				if(this.arr[i][j].mine == true){
-						numBombs--;
+					numBombs--;
 				}
             }
         }//populates the array couldn't get adding mines to work
@@ -151,7 +151,7 @@ class mineField {
 				this.Expand(cell,row,col+1);
 			}
 			if(row < this.height-1){
-				this.Expand(cell,row + 1,col);
+				this.Expand(cell,row+1,col);
 				if(col > 0){
 					this.Expand(cell,row+1,col-1);
 				}
