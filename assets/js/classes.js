@@ -71,7 +71,7 @@ class mineField {
 				cell[row][col].className = 'bomb';
 				this.ShowBombs(cell, height, width);
 				this.endgame = true;
-				window.alert("You Lose");
+				window.alert("You Lose\nClick reset to try again");
 			}
 			else if(this.arr[row][col].adjminenum == 0){
 				this.Expand(cell,row,col,i,height, width);
@@ -115,8 +115,19 @@ class mineField {
 		this.arr[x][y].flag = true;
 		flags --;
 		if(flags == 0) {
-
+			Checkflags();
 		}
+	}
+	Checkflags(){
+		for(let i = 0; i<this.height; i++){
+			for(let j = 0; j<this.width; j++){
+				if(this.arr[i][j].mine && !(this.arr[i][j].flag)){
+					return;
+				}
+			}
+		}
+		window.alert("You Win\nClick reset to play again");
+		this.endgame = true;
 	}
 	Expand(cell, row, col, i, height, width) {
 		if(cell[row][col].className == 'clicked' || cell[row][col].className == 'clicked1'|| cell[row][col].className == 'clicked2' || cell[row][col].className == 'clicked3'|| cell[row][col].className == 'clicked4'|| cell[row][col].className == 'clicked5'
