@@ -1,11 +1,29 @@
+/**
+ * Represents a single cell in the grid.
+ * @class
+ */
 class Tile {
+	/**
+	 * Represents a single cell in the grid.
+	 * @constructor
+	 */
 	constructor(){
 		this.mine = false;
 		this.flag = false;
 		this.adjminenum = 0;
 	}
 }
+/**
+ * Represents the logic for the mineField.
+ * @class
+ */
 class mineField {
+	/**
+	 * @constructor
+	 * @param {int} height - The height of the grid.
+	 * @param {int} width - The width of the grid.
+	 * @param {int} numBombs - The amount of bombs to be placed in the grid.
+	 */
     constructor(height, width, numBombs){
         this.height = height;
         this.width = width;
@@ -26,10 +44,10 @@ class mineField {
 					numBombs--;
 				}
             }
-        }//populates the array couldn't get adding mines to work
+        }//populates the array with mines
 		this.numberField();
     }
-	numberField()
+	numberField() //adds the numbers to the board
 	{
 		for(let i=0; i<this.height; i++)
 		{

@@ -47,13 +47,15 @@
                     let board = document.getElementById('boardInput');
                     console.log(bombs.value);
                     console.log(board.value);
-                    drawBoard(board.value, bombs.value);
+                    drawBoard(board.value, board.value, bombs.value);
                 }
 
             button.addEventListener("click", function(event){
                         deleteBoard();
                         bombs = document.getElementById('bombsInput');
                         board = document.getElementById('boardInput');
+                        console.log(bombs.value);
+                        console.log(board.value);
                         drawBoard(board.value, board.value, bombs.value);
           });
         </script>

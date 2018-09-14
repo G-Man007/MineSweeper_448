@@ -6,13 +6,15 @@
   width:30px; height:30px;
   border:1px solid #ccc;
   text-align:center;
+  background-color: gray;
   font-family:sans-serif; font-size:13px
 }
 .grid td.clicked {
-	background: url("images/zero.jpg") no-repeat scroll 0 0 transparent;
+	background-color: white;
+	/*background: url("images/zero.jpg") no-repeat scroll 0 0 transparent;
 	color: #cccccc;
-	background-position: center; /* Center the image */
-	background-repeat: no-repeat; /* Do not repeat the image */
+	background-position: center; /* Center the image
+	background-repeat: no-repeat; /* Do not repeat the image
 	background-size: 32px 32px; /* Resize the background image to cover the entire container */
 }
 .grid td.clicked1 {

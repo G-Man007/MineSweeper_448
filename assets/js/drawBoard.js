@@ -4,7 +4,8 @@ let grid = null;
 /**
  * Represents a board.
  * @constructor
- * @param {int} title - The side length of the grid.
+ * @param {int} height - The height of the grid.
+ * @param {int} width - The width of the grid.
  * @param {int} bombsLeft - The amount of bombs to be placed in the grid.
  */
 function drawBoard(height, width, bombsLeft){
