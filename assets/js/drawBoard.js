@@ -1,4 +1,3 @@
-let cell = null;
 let grid = null;
 /**
  * Represents a board.
@@ -9,10 +8,9 @@ let grid = null;
  * @returns - nothing
  */
 function drawBoard(height, width, bombsLeft){
-	cell = [];
+	let cell = [];
  	let lastClicked;
 	let field = new mineField(height, width, bombsLeft);
-
 
     grid = document.createElement('table');
     grid.className = 'grid';
@@ -20,22 +18,16 @@ function drawBoard(height, width, bombsLeft){
     for (let r=0; r<height; r++){
     	let tr = grid.appendChild(document.createElement('tr')); //creates a new row for each r value
  		cell.push([0]);
-
         for (let c=0; c<width; c++){
          	cell[r][c] = tr.appendChild(document.createElement('td')); //creates a new table data cell in the current row for each column
-            cell[r][c].field = field;
-			cell[r][c].row = r;
-			cell[r][c].col = c;
             cell[r][c].onclick = function(){
-				cell[r][c].field.Click(cell,r,c);
+				field.Click(cell,r,c);
 			};
 			cell[r][c].oncontextmenu = function(){
-				cell[r][c].field.Flag(cell,r,c);
+				field.Flag(cell,r,c);
 			};
- 			field.arr[r][c].cell = cell[r][c];
      	}
     }
-
 	document.body.appendChild(grid);
 }
 /**
