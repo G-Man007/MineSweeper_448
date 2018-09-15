@@ -42,7 +42,7 @@
             </div>
           </form>
         </li>
-        <li><button type="button" id="btn-success">Reset</button></li>
+        <li><button type="button" id="btn-success">Create Board</button></li>
         <script>
 
             let button = document.getElementById('btn-success');
@@ -55,6 +55,8 @@
                     let cols = document.getElementById('columnsInput');
                     document.getElementById("flagsOutput").innerHTML = bombs.value;
                     document.getElementById("flagsOutput").style.color="white";
+                    document.getElementById("flagsOutput").style.fontFamily="videophreak";
+
 
 
                     drawBoard(rows.value, cols.value, bombs.value);
@@ -71,8 +73,8 @@
                         if(rows.value < 2 || cols.value < 2){
                             window.alert("Invalid input\nBoard must be at least 2 x 2");
                         }
-                        else if(rows.value > 50 || cols.value > 50){
-                            window.alert("Invalid input\nBoard must be less than 50 x 50");
+                        else if(rows.value > 40 || cols.value > 40){
+                            window.alert("Invalid input\nBoard must be less than 40 x 40");
                         }
                         else if(bombs.value < 1){
                             window.alert("Invalid input\nBoard must have at least 1 bomb");
