@@ -1,24 +1,33 @@
 .grid {
-  margin:1em auto; border-collapse:collapse
+  margin:1em auto; border-collapse:separate
+  padding: 2px 2px;
+  -moz-border-radius:    0px 26px 0px 0px;
 }
 .grid td {
   cursor:pointer;
   width:30px; height:30px;
-  border:1px solid #ccc;
+  border:1px solid #4973ee;
   text-align:center;
-  background-color: gray;
+  background-color: #4973ee;
   font-family:sans-serif; font-size:13px
+  -moz-border-radius:    0px 26px 0px 0px;
+  border-radius: 10px;
+  padding: 20px 20px;
+
 }
 .grid td.norm {
   cursor:pointer;
   width:30px; height:30px;
-  border:1px solid #ccc;
+  border:1px solid #4973ee;
   text-align:center;
-  background-color: gray;
+  background-color: #4973ee;
   font-family:sans-serif; font-size:13px
+  -moz-border-radius:    0px 26px 0px 0px;
+  border-radius: 10px;
+  padding: 20px 20px;
 }
 .grid td.clicked {
-	background-color: white;
+	background-color:  #c0ccf2 ;
 	/*background: url("images/zero.jpg") no-repeat scroll 0 0 transparent;
 	color: #cccccc;
 	background-position: center; /* Center the image
@@ -97,9 +106,15 @@
 	background-size: 25px 25px; /* Resize the background image to cover the entire container */
 }
 
+table {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+
 /* navbar */
 input {
   width: 60px !important;
+  font-family: videophreak;
 }
 output {
   color: red;
@@ -112,6 +127,7 @@ flagsOutput {
 label {
   color: white;
   margin: 35px 20px;
+  font-family: videophreak;
 }
 
 button {
@@ -121,8 +137,9 @@ button {
 .navbar-brand {
   color: white !important;
   /*text-align: left !important;*/
-  font-size: 220% !important;
+  font-size: 400% !important;
   margin: 20px 0px;
+  font-family: videophreak;
 }
 
 .flags {
@@ -130,6 +147,16 @@ button {
   font-size: 130%;
   margin: 21px 20px;
   font-weight: bold;
+}
+/*https://www.1001fonts.com/video-game-fonts.html?page=6&items=10*/
+@font-face {
+  font-family: heavyloudedge;
+  src: url("fonts/heavyloudedge/heavyloudedge_bold.ttf");
+}
+
+@font-face {
+  font-family: videophreak;
+  src: url("fonts/VIDEOPHREAK.ttf");
 }
 
 .flagsLeft {
