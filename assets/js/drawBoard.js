@@ -1,4 +1,5 @@
 let grid = null;
+
 /**
  * Represents a board.
  * @constructor
@@ -23,7 +24,8 @@ function drawBoard(height, width, bombsLeft){
 				field.Click(cell,r,c);
 			};
 			cell[r][c].oncontextmenu = function(){
-				field.Flag(cell,r,c);
+				document.getElementById("flagsOutput").innerHTML = field.Flag(cell,r,c);
+				document.getElementById("flagsOutput").style.color="white";
 				return false;
 			};
      	}

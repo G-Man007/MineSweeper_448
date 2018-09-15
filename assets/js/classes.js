@@ -169,6 +169,7 @@ class mineField {
 		if(this.flags == 0) {
 			this.endgame = this.Checkflags();
 		}
+		return this.flags;
 	}
 	/**
 	 * Checks if all flags are in the correct place for the win.

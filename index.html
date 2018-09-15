@@ -22,7 +22,10 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a class="flags" href="/">Flags left</a></li>
+        <li>
+            <label for="flagsLeft">Flags Left:</label>
+            <form.oninput="flagsLeft.value" id = 'flagsOutput'>
+            <output name= "flagsLeft"</li>
         <li>
           <form class="form-inline" action="action_page.php">
             <div class="form-group">
@@ -50,6 +53,9 @@
                     let bombs = document.getElementById('bombsInput');
                     let rows = document.getElementById('rowsInput');
                     let cols = document.getElementById('columnsInput');
+                    document.getElementById("flagsOutput").innerHTML = bombs.value;
+                    document.getElementById("flagsOutput").style.color="white";
+
 
                     drawBoard(rows.value, cols.value, bombs.value);
                 }
@@ -58,6 +64,9 @@
                         bombs = document.getElementById('bombsInput');
                         rows = document.getElementById('rowsInput');
                         cols = document.getElementById('columnsInput');
+
+                        document.getElementById("flagsOutput").innerHTML = bombs.value;
+                        document.getElementById("flagsOutput").style.color="white";
 
                         if(rows.value < 2 || cols.value < 2){
                             window.alert("Invalid input\nBoard must be at least 2 x 2");
