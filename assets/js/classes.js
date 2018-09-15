@@ -196,7 +196,7 @@ class mineField {
 	 */
 	Expand(cell, row, col) {
 		if(cell[row][col].className == 'clicked' || cell[row][col].className == 'clicked1'|| cell[row][col].className == 'clicked2' || cell[row][col].className == 'clicked3'|| cell[row][col].className == 'clicked4'|| cell[row][col].className == 'clicked5'
-			|| cell[row][col].className == 'clicked6' || cell[row][col].className == 'clicked7' || cell[row][col].className =='clicked8'){
+			|| cell[row][col].className == 'clicked6' || cell[row][col].className == 'clicked7' || cell[row][col].className =='clicked8' || this.arr[row][col].flag){
 			return;
 		}
 		if(this.arr[row][col].adjminenum == 0 && !(this.arr[row][col].mine)){

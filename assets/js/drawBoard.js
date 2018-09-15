@@ -24,6 +24,7 @@ function drawBoard(height, width, bombsLeft){
 			};
 			cell[r][c].oncontextmenu = function(){
 				field.Flag(cell,r,c);
+				return false;
 			};
      	}
     }
