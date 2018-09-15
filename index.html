@@ -45,14 +45,7 @@
                 let pressed = false;
                     let bombs = document.getElementById('bombsInput');
                     let board = document.getElementById('boardInput');
-                    console.log(bombs.value);
-                    console.log(board.value);
-                    if(bombs.value < 1 || board.value < 2){
-                        window.alert("Invalid input\nBoard must be at least 2 x 2 and there must be at least 1 bomb");
-                    }
-                    else {
-                        drawBoard(board.value, board.value, bombs.value);
-                    }
+                    drawBoard(board.value, board.value, bombs.value);
                 }
 
             button.addEventListener("click", function(event){
@@ -60,8 +53,17 @@
                         board = document.getElementById('boardInput');
                         console.log(bombs.value);
                         console.log(board.value);
-                        if(bombs.value < 1 || board.value < 2){
-                            window.alert("Invalid input\nBoard must be at least 2 x 2 and there must be at least 1 bomb");
+                        if(board.value < 2){
+                            window.alert("Invalid input\nBoard must be at least 2 x 2");
+                        }
+                        else if(board.value > 50){
+                            window.alert("Invalid input\nBoard must be less than 50 x 50");
+                        }
+                        else if(bombs.value < 1){
+                            window.alert("Invalid input\nBoard must have at least 1 bomb");
+                        }
+                        else if(bombs.value > ((board.value * board.value) - 1)){
+                            window.alert("Invalid input\nBoard must have less bombs than cells");
                         }
                         else {
                             deleteBoard();
