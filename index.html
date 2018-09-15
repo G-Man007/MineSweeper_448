@@ -40,23 +40,33 @@
 
             let button = document.getElementById('btn-success');
 
-            function load(){
+            function load(){ //runs on the page load and creates a default grid
 
                 let pressed = false;
                     let bombs = document.getElementById('bombsInput');
                     let board = document.getElementById('boardInput');
                     console.log(bombs.value);
                     console.log(board.value);
-                    drawBoard(board.value, board.value, bombs.value);
+                    if(bombs.value < 1 || board.value < 2){
+                        window.alert("Invalid input\nBoard must be at least 2 x 2 and there must be at least 1 bomb");
+                    }
+                    else {
+                        drawBoard(board.value, board.value, bombs.value);
+                    }
                 }
 
             button.addEventListener("click", function(event){
-                        deleteBoard();
                         bombs = document.getElementById('bombsInput');
                         board = document.getElementById('boardInput');
                         console.log(bombs.value);
                         console.log(board.value);
-                        drawBoard(board.value, board.value, bombs.value);
+                        if(bombs.value < 1 || board.value < 2){
+                            window.alert("Invalid input\nBoard must be at least 2 x 2 and there must be at least 1 bomb");
+                        }
+                        else {
+                            deleteBoard();
+                            drawBoard(board.value, board.value, bombs.value);
+                        }
           });
         </script>
       </ul>
