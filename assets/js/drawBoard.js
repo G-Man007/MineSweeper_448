@@ -1,6 +1,5 @@
 let cell = null;
 let grid = null;
-
 /**
  * Represents a board.
  * @constructor
@@ -12,11 +11,13 @@ let grid = null;
 function drawBoard(height, width, bombsLeft){
 	cell = [];
  	let lastClicked;
- 	let field = new mineField(height, width, bombsLeft);
+	let field = new mineField(height, width, bombsLeft);
 
     let tab = clickableGrid(height, width,function(element,row,col){
  		element.field.Click(cell,row,col);
- 	});
+ 	},function(element,row,col){
+		element.field.Flag(row,col);
+	});
 
 	document.body.appendChild(grid);
 
@@ -28,7 +29,7 @@ function drawBoard(height, width, bombsLeft){
 	 * @param {@function} @callback
 	 * @returns - returns the finished grid
 	 */
- 	function clickableGrid( rows, cols, callback ){
+ 	function clickableGrid( rows, cols, callback, place ){
         grid = document.createElement('table');
         grid.className = 'grid';
 
@@ -39,11 +40,16 @@ function drawBoard(height, width, bombsLeft){
             for (let c=0; c<cols; c++){
              	cell[r][c] = tr.appendChild(document.createElement('td')); //creates a new table data cell in the current row for each column
                 cell[r][c].field = field;
+				cell[r][c].row = r;
+				cell[r][c].col = c;
                 cell[r][c].addEventListener('click',(function(element,r,c){ //on a click it creates a function scope for all of the local variables for a cell
                  	return function(){
                     	callback(element,r,c); //function that allows refernce to specific instance by creating closure
                     }
                 })(cell[r][c],r,c),false);
+				cell[r][c].oncontextmenu = function(){
+					cell[r][c].field.Flag(cell,r,c);
+				};
  				field.arr[r][c].cell = cell[r][c];
          	}
         }
@@ -51,7 +57,7 @@ function drawBoard(height, width, bombsLeft){
 	}
 }
 /**
- * deletes the table and the elements inside of it
+ * removes the old table from the page
  * @function
  * @returns - nothing
  */
@@ -59,4 +65,7 @@ function deleteBoard(){
 	if(grid != null){
  		document.body.removeChild(grid);
  	}
+}
+function flag(r,c){
+	cell[r][c].field.Flag(r, c);
 }

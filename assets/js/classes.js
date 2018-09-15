@@ -44,7 +44,7 @@ class mineField {
 					numBombs--;
 				}
             }
-        }//populates the array with mines
+        }//creates grid size and populates the array with mines
 		this.numberField();
     }
 	/**
@@ -90,13 +90,13 @@ class mineField {
 	/**
 	 * calls the expansion and checks for bombs in the cell clicked on
 	 * @function
-	 * @param {int} cell - The specific cell to alter.
+	 * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 	 * @param {int} row - The row of the grid the cell is in.
 	 * @param {int} col - The column of the grid the cell is in.
 	 * @returns - nothing
 	 */
 	Click(cell,row,col){
-		if(!(this.endgame)){
+		if(!(this.endgame) && !(this.arr[row][col].flag)){
 			if(this.arr[row][col].mine == true){
 				cell[row][col].className = 'bomb';
 				this.ShowBombs(cell);
@@ -136,7 +136,7 @@ class mineField {
 	/**
 	 * if the clicked on cell is a bomb and the endgame has occurred, this function turns all of the bombs visible
 	 * @function
-	 * @param {int} cell - The specific cell to alter.
+	 * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 	 * @returns - nothing
 	 */
 	ShowBombs(cell){
@@ -155,11 +155,19 @@ class mineField {
 	 * @param {int} col - The column of the grid the cell is in.
 	 * @returns - nothing
 	 */
-	Flag(row,col) {
-		this.arr[row][col].flag = true;
-		flags --;
-		if(flags == 0) {
-			Checkflags();
+	Flag(cell,row,col) {
+		if(this.arr[row][col].flag){
+			this.arr[row][col].flag = false;
+			cell[row][col].className = 'norm';
+			this.flags ++;
+		}
+		else{
+			this.arr[row][col].flag = true;
+			cell[row][col].className = 'flag';
+			this.flags --;
+		}
+		if(this.flags == 0) {
+			this.endgame = this.Checkflags();
 		}
 	}
 	/**
@@ -171,17 +179,17 @@ class mineField {
 		for(let i = 0; i<this.height; i++){
 			for(let j = 0; j<this.width; j++){
 				if(this.arr[i][j].mine && !(this.arr[i][j].flag)){
-					return;
+					return false;
 				}
 			}
 		}
 		window.alert("You Win\nClick reset to play again");
-		this.endgame = true;
+		return true;
 	}
 	/**
 	 * runs the expansion and checks for bombs in the cell clicked on
 	 * @function
-	 * @param {int} cell - The specific cell to alter.
+	 * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 	 * @param {int} row - The row of the grid the cell is in.
 	 * @param {int} col - The column of the grid the cell is in.
 	 * @returns - if cell is already clicked or a bomb is found, otherwise nothing
