@@ -9,7 +9,6 @@ let grid = null;
  */
 function drawBoard(height, width, bombsLeft){
 	let cell = [];
- 	let lastClicked;
 	let field = new mineField(height, width, bombsLeft);
 
     grid = document.createElement('table');
@@ -39,7 +38,4 @@ function deleteBoard(){
 	if(grid != null){
  		document.body.removeChild(grid);
  	}
-}
-function flag(r,c){
-	cell[r][c].field.Flag(r, c);
 }
