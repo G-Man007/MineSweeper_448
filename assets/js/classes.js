@@ -111,8 +111,9 @@ class mineField {
 		}
 	}
 	/**
-	 * Handles the functionality of flags. If a flag is placed it will decrement and in the case all are gone it calls checkFlags to check if they're all in the correct place for the win.
+	 * Handles the functionality of flags. If a flag is placed it will decrement and in the case all are gone it calls checkFlags to check if they're all in the correct place for the win. Pre: cells are already generated; Post: flags are placed, removed, or the game ends.
 	 * @function
+	 * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 	 * @param {int} row - The row of the grid the cell is in.
 	 * @param {int} col - The column of the grid the cell is in.
 	 * @returns - nothing
