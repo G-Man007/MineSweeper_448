@@ -45,24 +45,22 @@ class mineField {
 				}
             }
         }//creates grid size and populates the array with mines
-		this.numberField();
+		this.placeBombs(numBombs);
+		//this.numberField();
     }
 	/**
 	 * @function
 	 * loops through the grid and adds the numbers to the board in the applicable cells.
 	 * @returns - nothing
 	 */
-	numberField()
+	/*numberField()
 	{
-		let numbomb = this.bombs;
 		while(this.bombs > 0){
 			for(let i=0; i<this.height; i++)
 			{
 				for(let j=0; j<this.width; j++)
 				{
-					this.arr[i][j].mine = this.placeBombs(numbomb);
 					if(this.arr[i][j].mine){
-						numbomb --;
 						if(i > 0){
 							this.arr[i-1][j].adjminenum++;
 							if(j > 0){
@@ -88,13 +86,10 @@ class mineField {
 							}
 						}
 					}
-					if(numbomb == 0){
-						return;
-					}
 				}
 			}
 		}
-	}
+	}*/
 	/**
 	 * calls the expansion and checks for bombs in the cell clicked on
 	 * @function
@@ -247,10 +242,40 @@ class mineField {
 	 * @param {int} cellsLeft - The amount of cells left to be checked
 	 * @returns - returns true if bombs are left and the random number is less than the ratio of bombsleft to cells left. Otherwise, returns false.
 	 */
-	placeBombs(bombsLeft, cellsLeft){
-		if(bombsLeft > 0){
-			return(Math.random() <= (this.bombs / (this.height * this.width)));
+	placeBombs(bombsLeft){
+		let x = 0;
+		let y = 0;
+		while(bombsLeft > 0){
+			x = Math.floor(Math.random() * this.height);
+			y = Math.floor(Math.random() * this.width);
+			if(!(this.arr[x][y].mine)){
+				this.arr[x][y].mine = true;
+				bombsLeft --;
+				if(x > 0){
+					this.arr[x-1][y].adjminenum++;
+					if(y > 0){
+						this.arr[x-1][y-1].adjminenum++;
+					}
+					if(y < this.width-1){
+						this.arr[x-1][y+1].adjminenum++;
+					}
+				}
+				if(y > 0){
+					this.arr[x][y-1].adjminenum++;
+				}
+				if(y < this.width-1){
+					this.arr[x][y+1].adjminenum++;
+				}
+				if(x < this.height-1){
+					this.arr[x+1][y].adjminenum++;
+					if(y > 0){
+						this.arr[x+1][y-1].adjminenum++;
+					}
+					if(y < this.width-1){
+						this.arr[x+1][y+1].adjminenum++;
+					}
+				}
+			}
 		}
-		return false;
 	}
 }
