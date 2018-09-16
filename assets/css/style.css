@@ -56,7 +56,7 @@
 	background-size: 32px 32px; /* Resize the background image to cover the entire container */
 }
 .grid td.clicked4 {
-	background: url("images/four.jpg") no-repeat scroll 0 0 transparent;
+	background: url("images/videophreak-four.jpg") no-repeat scroll 0 0 transparent;
 	color: #cccccc;
 	background-position: center; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */

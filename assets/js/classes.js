@@ -38,7 +38,7 @@ class mineField {
             this.arr.push([0]);
             for(let j = 0; j < width; j++){
                 this.arr[i][j] = new Tile();
-				this.arr[i][j].mine = this.placeBombs(numBombs,cellsLeft);
+				//this.arr[i][j].mine = this.placeBombs(numBombs,cellsLeft);
 				cellsLeft--;
 				if(this.arr[i][j].mine == true){
 					numBombs--;
@@ -54,34 +54,42 @@ class mineField {
 	 */
 	numberField()
 	{
-		for(let i=0; i<this.height; i++)
-		{
-			for(let j=0; j<this.width; j++)
+		let numbomb = this.bombs;
+		while(this.bombs > 0){
+			for(let i=0; i<this.height; i++)
 			{
-				if(this.arr[i][j].mine){
-					if(i > 0){
-						this.arr[i-1][j].adjminenum++;
+				for(let j=0; j<this.width; j++)
+				{
+					this.arr[i][j].mine = this.placeBombs(numbomb);
+					if(this.arr[i][j].mine){
+						numbomb --;
+						if(i > 0){
+							this.arr[i-1][j].adjminenum++;
+							if(j > 0){
+								this.arr[i-1][j-1].adjminenum++;
+							}
+							if(j < this.width-1){
+								this.arr[i-1][j+1].adjminenum++;
+							}
+						}
 						if(j > 0){
-							this.arr[i-1][j-1].adjminenum++;
+							this.arr[i][j-1].adjminenum++;
 						}
 						if(j < this.width-1){
-							this.arr[i-1][j+1].adjminenum++;
+							this.arr[i][j+1].adjminenum++;
+						}
+						if(i < this.height-1){
+							this.arr[i+1][j].adjminenum++;
+							if(j > 0){
+								this.arr[i+1][j-1].adjminenum++;
+							}
+							if(j < this.width-1){
+								this.arr[i+1][j+1].adjminenum++;
+							}
 						}
 					}
-					if(j > 0){
-						this.arr[i][j-1].adjminenum++;
-					}
-					if(j < this.width-1){
-						this.arr[i][j+1].adjminenum++;
-					}
-					if(i < this.height-1){
-						this.arr[i+1][j].adjminenum++;
-						if(j > 0){
-							this.arr[i+1][j-1].adjminenum++;
-						}
-						if(j < this.width-1){
-							this.arr[i+1][j+1].adjminenum++;
-						}
+					if(numbomb == 0){
+						return;
 					}
 				}
 			}
@@ -101,7 +109,7 @@ class mineField {
 				cell[row][col].className = 'bomb';
 				this.ShowBombs(cell);
 				this.endgame = true;
-				window.alert("You Lose\nClick reset to try again");
+				window.alert("You Lose\nClick create board to try again");
 			}
 			//checks for all of the possible types of cells the clicked one could be
 			else if(this.arr[row][col].adjminenum == 0){
@@ -184,7 +192,7 @@ class mineField {
 				}
 			}
 		}
-		window.alert("You Win\nClick reset to play again");
+		window.alert("You Win\nClick create board to play again");
 		return true;
 	}
 	/**
@@ -241,7 +249,7 @@ class mineField {
 	 */
 	placeBombs(bombsLeft, cellsLeft){
 		if(bombsLeft > 0){
-			return(Math.random() <= (bombsLeft / cellsLeft));
+			return(Math.random() <= (this.bombs / (this.height * this.width)));
 		}
 		return false;
 	}
