@@ -159,20 +159,25 @@ class mineField {
 	 * @returns - nothing
 	 */
 	Flag(cell,row,col) {
-		if(this.arr[row][col].flag){
-			this.arr[row][col].flag = false;
-			cell[row][col].className = 'norm';
-			this.flags ++;
+		if(!(this.endgame)){
+			if(this.arr[row][col].flag){
+				this.arr[row][col].flag = false;
+				cell[row][col].className = 'norm';
+				this.flags ++;
+			}
+			else if(cell[row][col].className == '' || cell[row][col].className == 'norm'){
+				this.arr[row][col].flag = true;
+				cell[row][col].className = 'flag';
+				this.flags --;
+			}
+			if(this.flags == 0) {
+				this.endgame = this.Checkflags();
+			}
+			return this.flags;
 		}
-		else if(cell[row][col].className == '' || cell[row][col].className == 'norm'){
-			this.arr[row][col].flag = true;
-			cell[row][col].className = 'flag';
-			this.flags --;
+		else{
+			return 0;
 		}
-		if(this.flags == 0) {
-			this.endgame = this.Checkflags();
-		}
-		return this.flags;
 	}
 	/**
 	 * Checks if all flags are in the correct place for the win.
