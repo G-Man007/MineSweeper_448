@@ -48,48 +48,7 @@ class mineField {
 		this.placeBombs(numBombs);
 		//this.numberField();
     }
-	/**
-	 * @function
-	 * loops through the grid and adds the numbers to the board in the applicable cells.
-	 * @returns - nothing
-	 */
-	/*numberField()
-	{
-		while(this.bombs > 0){
-			for(let i=0; i<this.height; i++)
-			{
-				for(let j=0; j<this.width; j++)
-				{
-					if(this.arr[i][j].mine){
-						if(i > 0){
-							this.arr[i-1][j].adjminenum++;
-							if(j > 0){
-								this.arr[i-1][j-1].adjminenum++;
-							}
-							if(j < this.width-1){
-								this.arr[i-1][j+1].adjminenum++;
-							}
-						}
-						if(j > 0){
-							this.arr[i][j-1].adjminenum++;
-						}
-						if(j < this.width-1){
-							this.arr[i][j+1].adjminenum++;
-						}
-						if(i < this.height-1){
-							this.arr[i+1][j].adjminenum++;
-							if(j > 0){
-								this.arr[i+1][j-1].adjminenum++;
-							}
-							if(j < this.width-1){
-								this.arr[i+1][j+1].adjminenum++;
-							}
-						}
-					}
-				}
-			}
-		}
-	}*/
+	
 	/**
 	 * calls the expansion and checks for bombs in the cell clicked on
 	 * @function
@@ -182,7 +141,7 @@ class mineField {
 	/**
 	 * Checks if all flags are in the correct place for the win.
 	 * @function
-	 * @returns - false if there are unflagged mines, nothing if the game ends
+	 * @returns - false if there are unflagged mines, true if the game ends
 	 */
 	Checkflags(){
 		for(let i = 0; i<this.height; i++){
@@ -244,7 +203,6 @@ class mineField {
 	 * runs the expansion and checks for bombs in the cell clicked on
 	 * @function
 	 * @param {int} bombsLeft - The amount of bombs yet to be placed.
-	 * @param {int} cellsLeft - The amount of cells left to be checked
 	 * @returns - returns true if bombs are left and the random number is less than the ratio of bombsleft to cells left. Otherwise, returns false.
 	 */
 	placeBombs(bombsLeft){
