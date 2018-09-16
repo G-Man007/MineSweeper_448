@@ -1,6 +1,6 @@
 /**
- * Represents a single cell in the grid.
  * @class
+ * @classdesc Represents a single cell in the grid.
  */
 class Tile {
 	/**
@@ -14,8 +14,8 @@ class Tile {
 	}
 }
 /**
- * Represents the logic for the mineField.
  * @class
+ * @classdesc Represents the logic for the mineField.
  */
 class mineField {
 	/**
@@ -48,9 +48,9 @@ class mineField {
 		this.placeBombs(numBombs);
 		//this.numberField();
     }
-	
+
 	/**
-	 * calls the expansion and checks for bombs in the cell clicked on
+	 * Calls the expansion and checks for bombs in the cell clicked on. Pre: cells already generated; Post: based on the type of cell, different outcomes occur
 	 * @function
 	 * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 	 * @param {int} row - The row of the grid the cell is in.
@@ -96,7 +96,7 @@ class mineField {
 		}
 	}
 	/**
-	 * if the clicked on cell is a bomb and the endgame has occurred, this function turns all of the bombs visible
+	 * If the clicked on cell is a bomb and the endgame has occurred, this function turns all of the bombs visible. Pre: cells are already generated; Post: all bombs are revealed.
 	 * @function
 	 * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 	 * @returns - nothing
@@ -111,7 +111,7 @@ class mineField {
 		}
 	}
 	/**
-	 * handles the functionality of flags. If a flag is placed it will decrement and in the case all are gone it calls checkFlags to check if they're all in the correct place for the win.
+	 * Handles the functionality of flags. If a flag is placed it will decrement and in the case all are gone it calls checkFlags to check if they're all in the correct place for the win.
 	 * @function
 	 * @param {int} row - The row of the grid the cell is in.
 	 * @param {int} col - The column of the grid the cell is in.
@@ -139,7 +139,7 @@ class mineField {
 		}
 	}
 	/**
-	 * Checks if all flags are in the correct place for the win.
+	 * Checks if all flags are in the correct place for the win. Pre: cells are already generated; Post: Game ends if all flags are placed correctly.
 	 * @function
 	 * @returns - false if there are unflagged mines, true if the game ends
 	 */
@@ -155,7 +155,7 @@ class mineField {
 		return true;
 	}
 	/**
-	 * runs the expansion and checks for bombs in the cell clicked on
+	 * Runs the expansion and checks for bombs in the cell clicked on. Pre: A cell is clicked and is not a numbered cell; Post: from the original cell, it expands until numbered cells are revealed.
 	 * @function
 	 * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 	 * @param {int} row - The row of the grid the cell is in.
@@ -200,7 +200,7 @@ class mineField {
 		}
 	}
 	/**
-	 * runs the expansion and checks for bombs in the cell clicked on
+	 * Runs the expansion and checks for bombs in the cell clicked on. Pre: the cells and board are already created; Post: bombs are placed randomly throughout the board.
 	 * @function
 	 * @param {int} bombsLeft - The amount of bombs yet to be placed.
 	 * @returns - returns true if bombs are left and the random number is less than the ratio of bombsleft to cells left. Otherwise, returns false.

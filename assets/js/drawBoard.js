@@ -1,7 +1,7 @@
 let grid = null;
 
 /**
- * Represents a board.
+ * Represents a board. Pre: Empty body of HTML; Post: Playing field is generated in the body
  * @constructor
  * @param {int} height - The height of the grid.
  * @param {int} width - The width of the grid.
@@ -33,7 +33,7 @@ function drawBoard(height, width, bombsLeft){
 	document.body.appendChild(grid);
 }
 /**
- * removes the old table from the page
+ * Removes the old table from the page. Pre: Grid is already generated; Post: All elements of the grid are delered
  * @function
  * @returns - nothing
  */
