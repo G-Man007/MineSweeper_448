@@ -38,7 +38,6 @@ class mineField {
             this.arr.push([0]);
             for(let j = 0; j < width; j++){
                 this.arr[i][j] = new Tile();
-				//this.arr[i][j].mine = this.placeBombs(numBombs,cellsLeft);
 				cellsLeft--;
 				if(this.arr[i][j].mine == true){
 					numBombs--;
@@ -204,7 +203,7 @@ class mineField {
 	 * Runs the expansion and checks for bombs in the cell clicked on. Pre: the cells and board are already created; Post: bombs are placed randomly throughout the board.
 	 * @function
 	 * @param {int} bombsLeft - The amount of bombs yet to be placed.
-	 * @returns - returns true if bombs are left and the random number is less than the ratio of bombsleft to cells left. Otherwise, returns false.
+	 * @returns - nothing
 	 */
 	placeBombs(bombsLeft){
 		let x = 0;
