@@ -154,7 +154,9 @@ class mineField {
 				}
 			}
 		}
-		window.alert("You Win\nClick create board to play again");
+		setTimeout(function() {
+			window.alert("You Win\nClick create board to play again");
+		}, 25)
 		return true;
 	}
 	/**
