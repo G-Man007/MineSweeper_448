@@ -17,17 +17,23 @@ function drawBoard(height, width, bombsLeft){
 
     for (let r=0; r<height; r++){
     	let tr = grid.appendChild(document.createElement('tr')); //creates a new row for each r value
- 		cell.push([0]);
-        for (let c=0; c<width; c++){
-         	cell[r][c] = tr.appendChild(document.createElement('td')); //creates a new table data cell in the current row for each column
+ 			cell.push([0]);
+
+      for (let c=0; c<width; c++){
+         		cell[r][c] = tr.appendChild(document.createElement('td')); //creates a new table data cell in the current row for each column
             cell[r][c].onclick = function(){
-				field.Click(cell,r,c);
-			};
-			cell[r][c].oncontextmenu = function(){
-				document.getElementById("flagsOutput").innerHTML = field.Flag(cell,r,c);
-				document.getElementById("flagsOutput").style.color="white";
-				return false;
-			};
+						field.Click(cell,r,c);
+						if(cell.Checkflags() == false){
+							window.alert("You Lose\nClick create board to try again");
+							}
+						};
+				cell[r][c].oncontextmenu = function(){
+					document.getElementById("flagsOutput").innerHTML = field.Flag(cell,r,c);
+					document.getElementById("flagsOutput").style.color="white";
+					return false;
+				};
+
+
      	}
     }
 	document.body.appendChild(grid);

@@ -29,16 +29,16 @@
         <li>
           <form class="form-inline" action="action_page.php">
             <div class="form-group">
-              <label for="bombs">Bomb number</label>
-              <input class="form-control" type="number" id="bombsInput" value="10">
-            </div>
-            <div class="form-group">
               <label for="Rows">Rows</label>
               <input class="form-control" type="number" id="rowsInput" value="10">
             </div>
             <div class="form-group">
               <label for="Columns">Columns</label>
               <input class="form-control" type="number" id="columnsInput" value="10">
+            </div>
+              <div class="form-group">
+              <label for="bombs">Bomb number</label>
+              <input class="form-control" type="number" id="bombsInput" value="10">
             </div>
           </form>
         </li>
@@ -56,9 +56,6 @@
                     document.getElementById("flagsOutput").innerHTML = bombs.value;
                     document.getElementById("flagsOutput").style.color="white";
                     document.getElementById("flagsOutput").style.fontFamily="videophreak";
-
-
-
                     drawBoard(rows.value, cols.value, bombs.value);
                 }
 
@@ -92,7 +89,7 @@
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-    <body onload ="load()" </body>
+<body onload ="load()" </body>
 </body>
 <script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
