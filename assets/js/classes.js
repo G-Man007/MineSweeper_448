@@ -62,7 +62,9 @@ class mineField {
 				cell[row][col].className = 'bomb';
 				this.ShowBombs(cell);
 				this.endgame = true;
-				window.alert("You Lose\nClick create board to try again");
+				setTimeout(function() {
+					window.alert("You Lose\nClick create board to try again");
+				}, 25)
 			}
 			//checks for all of the possible types of cells the clicked one could be
 			else if(this.arr[row][col].adjminenum == 0){
@@ -109,6 +111,7 @@ class mineField {
 			}
 		}
 	}
+
 	/**
 	 * Handles the functionality of flags. If a flag is placed it will decrement and in the case all are gone it calls checkFlags to check if they're all in the correct place for the win. Pre: cells are already generated; Post: flags are placed, removed, or the game ends.
 	 * @function
@@ -151,7 +154,9 @@ class mineField {
 				}
 			}
 		}
-		window.alert("You Win\nClick create board to play again");
+		setTimeout(function() {
+			window.alert("You Win\nClick create board to play again");
+		}, 25)
 		return true;
 	}
 	/**
