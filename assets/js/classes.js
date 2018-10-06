@@ -231,23 +231,44 @@ class MineField {
 * @param the row and column cooridnate from the 2D array
 * @returns - string for the stats report text box in nav bar
 */
-  statsReport (row, colm) {
+  statsReport (cell, row, colm) {
     let x = row + 1
     let y = colm + 1
-    let coordinate = '(' + x + ',' + y + ')'
-    let unchartedTiles = this.unchartedTiles()
+    let coordinate = '(' + y + ',' + x + ')'
+    let revealedTiles = this.revealedTiles(cell)
     let bombstoBeFlagged = this.bombsLeft()
-    return (coordinate + '  ' + unchartedTiles + '  ' + bombstoBeFlagged)
+    return ('Coordinates: '+coordinate + '  Revealed Tiles: ' + revealedTiles + ' Other: ' + bombstoBeFlagged)
   }
 
   /**
-* returns the amount of unchartedTiles left, statsReport helper
+* returns the amount of revealedTiles left, statsReport helper
 * should format like 1/100
 * @function
 * @returns - amount of unchartedTiles left
 */
-  unchartedTiles () {
-    return 50
+  revealedTiles (cell) {
+		let revealed = 0
+		let x = this.height
+		let y = this.width
+	for (let i = 1; i < 9 ; i++){
+		for (let k = 0; k < x; k++) {
+      for (let j = 0; j < y; j++) {
+        if (cell[k][j].className === 'clicked' + i) {
+          revealed++
+        }
+      }
+    }
+	}
+	for (let k = 0; k < x; k++) {
+		for (let j = 0; j < y; j++) {
+			if (cell[k][j].className === 'clicked') {
+				revealed++
+			}
+		}
+	}
+		let total = x * y
+		let final = revealed + '/' + total
+    return final
   }
 
   /**
