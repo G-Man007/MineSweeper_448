@@ -14,6 +14,12 @@
   border-radius: 10px;
   padding: 15px 15px;
 }
+/*.stats is updated as the user hovers over tiles*/
+.grid td:hover, .stats {
+    cursor:pointer;
+    background-color: black;
+    display: block;
+}
 
 .grid td.norm {
   cursor:pointer;
@@ -163,6 +169,23 @@ button {
 
 .flagsLeft {
 	color: red;
+}
+
+/*stats class is used in the div right before the script that runs
+ the game, if you change display to block you can see where it is,
+  what I am trying to do above in the hover is switch the
+  display :none to display:block, we can move it in the html doc*/
+.stats{
+    width:100px;
+    height:75px;
+    position:absolute;
+    font-size: 80%;
+    background-color:white;
+    color: black;
+    padding:20px;
+    display: block;
+    z-index: 1199;
+    font-family: videophreak;
 }
 
 

@@ -25,13 +25,9 @@
         <li>
             <label for="flagsLeft">Flags Left:</label>
             <form.oninput="flagsLeft.value" id = 'flagsOutput'>
-            <output name= "flagsLeft"</li>
+            <output name= "flagsLeft"></li>
         <li>
           <form class="form-inline" action="action_page.php">
-            <div class="form-group">
-              <label for="bombs">Bomb number</label>
-              <input class="form-control" type="number" id="bombsInput" value="10">
-            </div>
             <div class="form-group">
               <label for="Rows">Rows</label>
               <input class="form-control" type="number" id="rowsInput" value="10">
@@ -40,9 +36,15 @@
               <label for="Columns">Columns</label>
               <input class="form-control" type="number" id="columnsInput" value="10">
             </div>
+              <div class="form-group">
+              <label for="bombs">Bomb number</label>
+              <input class="form-control" type="number" id="bombsInput" value="10">
+            </div>
           </form>
         </li>
         <li><button type="button" id="btn-success">Create Board</button></li>
+        <!--This is where the text box for my hover is located!-->
+        <li><div class="stats"><form.oninput="stats.value" id="statsNow"> <output name"statsOut"></div></li>
         <script>
 
             let button = document.getElementById('btn-success');
@@ -56,9 +58,7 @@
                     document.getElementById("flagsOutput").innerHTML = bombs.value;
                     document.getElementById("flagsOutput").style.color="white";
                     document.getElementById("flagsOutput").style.fontFamily="videophreak";
-
-
-
+                    document.getElementById("statsNow").innerHTML ="Hover Tile";
                     drawBoard(rows.value, cols.value, bombs.value);
                 }
 
@@ -69,7 +69,7 @@
 
                         document.getElementById("flagsOutput").innerHTML = bombs.value;
                         document.getElementById("flagsOutput").style.color="white";
-
+                        document.getElementById("statsNow").innerHTML ="Hover Tile";
                         if(rows.value < 2 || cols.value < 2){
                             window.alert("Invalid input\nBoard must be at least 2 x 2");
                         }
@@ -87,12 +87,17 @@
                             drawBoard(rows.value, cols.value, bombs.value);
                         }
           });
+
+        //  button.addEventListener("mouseover"), function(event){
+            //  document.getElementById("s")
+        //  });
+
         </script>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-    <body onload ="load()" </body>
+<body onload ="load()" </body>
 </body>
 <script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
