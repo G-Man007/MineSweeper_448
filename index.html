@@ -7,6 +7,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <script type="text/javascript" src="assets/js/drawBoard.js"></script>
   <script type="text/javascript" src="assets/js/classes.js"></script>
+  <script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -43,9 +45,12 @@
           </form>
         </li>
         <li><button type="button" id="btn-success">Create Board</button></li>
+        <li><button type="button" id="btn-cheat">Cheat Mode</button></li>
+
         <script>
 
             let button = document.getElementById('btn-success');
+            let cheatBtn = document.getElementById('btn-cheat');
 
             function load(){ //runs on the page load and creates a default grid
 
@@ -86,7 +91,11 @@
                             deleteBoard();
                             drawBoard(rows.value, cols.value, bombs.value);
                         }
-          });
+            });
+
+            cheatBtn.addEventListener("click", function(event){
+                Cheat();
+            });
         </script>
       </ul>
     </div><!--/.nav-collapse -->
@@ -94,6 +103,5 @@
 </nav>
     <body onload ="load()" </body>
 </body>
-<script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 </html>

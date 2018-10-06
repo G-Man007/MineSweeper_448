@@ -1,5 +1,5 @@
 let grid = null;
-
+let gField = null;
 /**
  * Represents a board. Pre: Empty body of HTML; Post: Playing field is generated in the body
  * @constructor
@@ -30,6 +30,9 @@ function drawBoard(height, width, bombsLeft){
 			};
      	}
     }
+
+	gField = field;
+
 	document.body.appendChild(grid);
 }
 /**
@@ -41,4 +44,8 @@ function deleteBoard(){
 	if(grid != null){
  		document.body.removeChild(grid);
  	}
+}
+
+function Cheat(){
+	gField.cheat();
 }

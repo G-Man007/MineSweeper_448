@@ -11,12 +11,15 @@ class Tile {
 		this.mine = false;
 		this.flag = false;
 		this.adjminenum = 0;
+		this.revealed = false;
+		this.cheat = false;
 	}
 }
 /**
  * @class
  * @classdesc Represents the logic for the mineField.
  */
+
 class mineField {
 	/**
 	 * @constructor
@@ -48,6 +51,103 @@ class mineField {
 		//this.numberField();
     }
 
+	cheat(){
+		//shows the board
+		//if(this.cheat = false){
+			for(let x=0; x<this.height; x++){
+				for(let y=0; y< this.width; y++){
+					if(!(this.arr[x][y].revealed )){
+						this.showTile(x,y); //show tile
+					}
+					//this.arr[x][y].; //disable tile
+				}
+			}
+			this.cheat = true;
+		/*}else{//hides the board
+			for(let x=0; x<this.height; x++){
+				for(let y=0; y< this.width; y++){
+					if(!(this.arr[x][y].revealed)){
+						hideTile(x,y); //show tile  //hide tile
+					}
+					//this.arr[x][y].; //enable tile
+				}
+			}
+			this.cheat = false;
+		}*/
+	}
+
+	hideTile(row, col){
+		this.arr[row,col] = 'norm';
+	}
+
+	showTile(row,col){
+		if(this.arr[row][col].mine == true){
+			this.arr[row][col].className = 'bomb';
+		}
+		else if(this.arr[row][col].adjminenum == 0){
+			this.arr[row,col] = 'clicked';
+		}
+		else if(this.arr[row][col].adjminenum == 1){
+			this.arr[row][col].className = 'clicked1';
+		}
+		else if(this.arr[row][col].adjminenum == 2){
+			this.arr[row][col].className = 'clicked2';
+		}
+		else if(this.arr[row][col].adjminenum == 3){
+			this.arr[row][col].className = 'clicked3';
+		}
+		else if(this.arr[row][col].adjminenum == 4){
+			this.arr[row][col].className = 'clicked4';
+		}
+		else if(this.arr[row][col].adjminenum == 5){
+			this.arr[row][col].className = 'clicked5';
+		}
+		else if(this.arr[row][col].adjminenum == 6){
+			this.arr[row][col].className = 'clicked6';
+		}
+		else if(this.arr[row][col].adjminenum == 7){
+			this.arr[row][col].className = 'clicked7';
+		}
+		else if(this.arr[row][col].adjminenum == 8){
+			this.arr[row][col].className = 'clicked8';
+		}
+
+
+
+
+		/*if(this.arr[row][col].mine == true){
+			cell[row][col].className = 'bomb';
+		}//checks for all of the possible types of cells the clicked one could be
+		else if(this.arr[row][col].adjminenum == 0){
+			cell[row][col].className = 'clicked';
+		}
+		else if(this.arr[row][col].adjminenum == 1){
+			cell[row][col].className = 'clicked1';
+		}
+		else if(this.arr[row][col].adjminenum == 2){
+			cell[row][col].className = 'clicked2';
+		}
+		else if(this.arr[row][col].adjminenum == 3){
+			cell[row][col].className = 'clicked3';
+		}
+		else if(this.arr[row][col].adjminenum == 4){
+			cell[row][col].className = 'clicked4';
+		}
+		else if(this.arr[row][col].adjminenum == 5){
+			cell[row][col].className = 'clicked5';
+		}
+		else if(this.arr[row][col].adjminenum == 6){
+			cell[row][col].className = 'clicked6';
+		}
+		else if(this.arr[row][col].adjminenum == 7){
+			cell[row][col].className = 'clicked7';
+		}
+		else if(this.arr[row][col].adjminenum == 8){
+			cell[row][col].className = 'clicked8';
+		}*/
+
+	}
+
 	/**
 	 * Calls the expansion and checks for bombs in the cell clicked on. Pre: cells already generated; Post: based on the type of cell, different outcomes occur
 	 * @function
@@ -60,11 +160,10 @@ class mineField {
 		if(!(this.endgame) && !(this.arr[row][col].flag)){
 			if(this.arr[row][col].mine == true){
 				cell[row][col].className = 'bomb';
-				this.ShowBombs(cell);
+				this.bs(cell);
 				this.endgame = true;
 				window.alert("You Lose\nClick create board to try again");
-			}
-			//checks for all of the possible types of cells the clicked one could be
+			}//checks for all of the possible types of cells the clicked one could be
 			else if(this.arr[row][col].adjminenum == 0){
 				this.Expand(cell,row,col);
 			}
@@ -92,6 +191,8 @@ class mineField {
 			else if(this.arr[row][col].adjminenum == 8){
 				cell[row][col].className = 'clicked8';
 			}
+
+			cell[row][col].revealed = true;
 		}
 	}
 	/**
