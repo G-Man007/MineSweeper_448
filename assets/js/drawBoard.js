@@ -21,24 +21,22 @@ function drawBoard (height, width, bombsLeft) {
 
     for (let c = 0; c < width; c++) {
       cell[r][c] = tr.appendChild(document.createElement('td')) // creates a new table data cell in the current row for each column
-			
       cell[r][c].onclick = function () {
         field.Click(cell, r, c)
         if (cell.Checkflags() === false) {
           window.alert('You Lose\nClick create board to try again')
         }
       }
-
       cell[r][c].oncontextmenu = function () {
         document.getElementById('flagsOutput').innerHTML = field.Flag(cell, r, c)
         document.getElementById('flagsOutput').style.color = 'white'
         return false
       }
 
-			cell[r][c].onmouseover = function () {
-				document.getElementById("statsNow").innerHTML = field.statsReport(r,c)
-				return false
-			}
+      cell[r][c].onmouseover = function () {
+        document.getElementById('statsNow').innerHTML = field.statsReport(cell, r, c)
+        return false
+      }
     }
   }
   document.body.appendChild(grid)
