@@ -23,9 +23,6 @@ function drawBoard (height, width, bombsLeft) {
       cell[r][c] = tr.appendChild(document.createElement('td')) // creates a new table data cell in the current row for each column
       cell[r][c].onclick = function () {
         field.Click(cell, r, c)
-        if (cell.Checkflags() === false) {
-          window.alert('You Lose\nClick create board to try again')
-        }
       }
       cell[r][c].oncontextmenu = function () {
         document.getElementById('flagsOutput').innerHTML = field.Flag(cell, r, c)
