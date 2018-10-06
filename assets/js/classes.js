@@ -237,7 +237,7 @@ class MineField {
     let coordinate = '(' + y + ',' + x + ')'
     let revealedTiles = this.revealedTiles(cell)
     let bombstoBeFlagged = this.bombsLeft()
-    return ('Coordinates: '+coordinate + '  Revealed: ' + revealedTiles + '  Other: ' + bombstoBeFlagged)
+    return ('Coordinates: '+coordinate + '  Revealed Tiles: ' + revealedTiles + ' Other: ' + bombstoBeFlagged)
   }
 
   /**
