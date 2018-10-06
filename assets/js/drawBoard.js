@@ -33,10 +33,10 @@ function drawBoard (height, width, bombsLeft) {
         return false
       }
 
-			cell[r][c].onmouseover = function () {
-				document.getElementById("statsNow").innerHTML = field.statsReport(r,c)
-				return false
-			}
+      cell[r][c].onmouseover = function () {
+        document.getElementById('statsNow').innerHTML = field.statsReport(r, c)
+        return false
+      }
     }
   }
   document.body.appendChild(grid)
