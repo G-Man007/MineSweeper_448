@@ -34,7 +34,7 @@ function drawBoard (height, width, bombsLeft) {
       }
 
 			cell[r][c].onmouseover = function () {
-				document.getElementById("statsNow").innerHTML = "(0,0)"
+				document.getElementById("statsNow").innerHTML = field.statsReport(r,c)
 				return false
 			}
     }
