@@ -91,7 +91,6 @@ class MineField {
       }
     }
   }
-
   /**
  * Handles the functionality of flags. If a flag is placed it will decrement and in the case all are gone it calls checkFlags to check if they're all in the correct place for the win. Pre: cells are already generated; Post: flags are placed, removed, or the game ends.
  * @function
@@ -225,5 +224,38 @@ class MineField {
         }
       }
     }
+  }
+  /**
+* Gives string that will fill the stats box with disired statistics
+* @function
+* @param the row and column cooridnate from the 2D array
+* @returns - string for the stats report text box in nav bar
+*/
+  statsReport (row, colm) {
+    let x = row + 1
+    let y = colm + 1
+    let coordinate = '(' + x + ',' + y + ')'
+    let unchartedTiles = this.unchartedTiles()
+    let bombstoBeFlagged = this.bombsLeft()
+    return (coordinate + '  ' + unchartedTiles + '  ' + bombstoBeFlagged)
+  }
+
+  /**
+* returns the amount of unchartedTiles left, statsReport helper
+* should format like 1/100
+* @function
+* @returns - amount of unchartedTiles left
+*/
+  unchartedTiles () {
+    return 50
+  }
+
+  /**
+* returns the amount of bombs left
+* @function
+* @returns - returns the amount of bombs left
+*/
+  bombsLeft () {
+    return 10
   }
 }
