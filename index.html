@@ -25,7 +25,7 @@
         <li>
             <label for="flagsLeft">Flags Left:</label>
             <form.oninput="flagsLeft.value" id = 'flagsOutput'>
-            <output name= "flagsLeft"</li>
+            <output name= "flagsLeft"></li>
         <li>
           <form class="form-inline" action="action_page.php">
             <div class="form-group">
@@ -43,6 +43,8 @@
           </form>
         </li>
         <li><button type="button" id="btn-success">Create Board</button></li>
+        <!--This is where the text box for my hover is located!-->
+        <li><div class="stats"><form.oninput="stats.value" id="statsNow"> <output name"statsOut"></div></li>
         <script>
 
             let button = document.getElementById('btn-success');
@@ -56,6 +58,7 @@
                     document.getElementById("flagsOutput").innerHTML = bombs.value;
                     document.getElementById("flagsOutput").style.color="white";
                     document.getElementById("flagsOutput").style.fontFamily="videophreak";
+                    document.getElementById("statsNow").innerHTML ="Hover Tile";
                     drawBoard(rows.value, cols.value, bombs.value);
                 }
 
@@ -66,7 +69,7 @@
 
                         document.getElementById("flagsOutput").innerHTML = bombs.value;
                         document.getElementById("flagsOutput").style.color="white";
-
+                        document.getElementById("statsNow").innerHTML ="Hover Tile";
                         if(rows.value < 2 || cols.value < 2){
                             window.alert("Invalid input\nBoard must be at least 2 x 2");
                         }
@@ -84,6 +87,11 @@
                             drawBoard(rows.value, cols.value, bombs.value);
                         }
           });
+
+        //  button.addEventListener("mouseover"), function(event){
+            //  document.getElementById("s")
+        //  });
+
         </script>
       </ul>
     </div><!--/.nav-collapse -->
