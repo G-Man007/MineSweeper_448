@@ -177,11 +177,13 @@ button {
   display :none to display:block, we can move it in the html doc*/
 .stats{
     position:absolute;
-    background-color:grey;
-    color: white;
+    font-size: 80%;
+    background-color:white;
+    color: black;
     padding:20px;
-    display: none;
+    display: block;
     z-index: 1199;
+    font-family: videophreak;
 }
 
 
