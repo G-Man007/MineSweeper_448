@@ -176,6 +176,8 @@ button {
   what I am trying to do above in the hover is switch the
   display :none to display:block, we can move it in the html doc*/
 .stats{
+    width:100px;
+    height:75px;
     position:absolute;
     font-size: 80%;
     background-color:white;
