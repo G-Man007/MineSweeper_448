@@ -32,6 +32,11 @@ function drawBoard (height, width, bombsLeft) {
         document.getElementById('flagsOutput').style.color = 'white'
         return false
       }
+
+			cell[r][c].onmouseover = function () {
+				document.getElementById("statsNow").innerHTML = "(0,0)"
+				return false
+			}
     }
   }
   document.body.appendChild(grid)
