@@ -15,9 +15,9 @@ class Tile {
 }
 /**
  * @class
- * @classdesc Represents the logic for the mineField.
+ * @classdesc Represents the logic for the MineField.
  */
-class mineField {
+class MineField {
 	/**
 	 * @constructor
 	 * @param {int} height - The height of the grid.
