@@ -246,4 +246,10 @@ class MineField {
 			}
 		}
 	}
+
+	statsReport(row, colm){
+		let x = row + 1;
+		let y = colm + 1;
+		return "("+x+","+y+")";
+	}
 }
