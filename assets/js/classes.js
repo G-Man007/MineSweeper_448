@@ -13,6 +13,7 @@ class Tile {
     this.adjminenum = 0
     this.revealed = false
     this.cheat = false
+    this.cheatOnce = false
     this.lastState = ''
     this.clicked = false
   }
@@ -35,6 +36,18 @@ class MineField {
     this.flags = numBombs
     this.arr = []
     this.endgame = false
+    this.cheatOnce = false
+      
+    //sound file for button from https://freesound.org/people/JarredGibb/sounds/219472/
+    this.buttonSound = new Audio('./assets/css/sounds/buttonSound.wav')
+    //sound file for losing from https://freesound.org/people/sharesynth/sounds/344505/
+    this.loseSound = new Audio('./assets/css/sounds/loseSound.wav')
+    //sound file for flags from https://freesound.org/people/Mattix/sounds/370367/
+    this.flagSound = new Audio('./assets/css/sounds/flagSound.wav')
+    //sound file for cheer from https://freesound.org/people/jayfrosting/sounds/333404/
+    this.cheerSound = new Audio('./assets/css/sounds/cheerSound.wav')
+    //sound file for clap from https://freesound.org/people/FreqMan/sounds/335107/
+    this.clapSound = new Audio('./assets/css/sounds/clapSound.wav')
 
     for (let i = 0; i < height; i++) {
       this.arr.push([0])
@@ -64,10 +77,12 @@ class MineField {
           cell[row][col].className = 'bomb'
           this.ShowBombs(cell)
           this.endgame = true
+          this.loseSound.play()
           setTimeout(function () {
             window.alert('You Lose\nClick create board to try again')
           }, 25)
         } else {
+            this.buttonSound.play()
         // checks for all of the possible types of cells the clicked one could be
           if (this.arr[row][col].adjminenum === 0) {
             this.arr[row][col].clicked = true
@@ -83,9 +98,9 @@ class MineField {
         }
       }
     }
-    // checks that if all flags have been used, which means that the board is possibly won
-    if (this.flags === 0) {
-      this.endgame = this.Checkwin()
+    //checks that if all flags have been used, which means that the board is possibly won
+    if ((this.flags === 0) && (this.endgame === false)) {
+        this.endgame = this.Checkwin()
     }
   }
 
@@ -119,6 +134,7 @@ class MineField {
         cell[row][col].className = 'norm'
         this.flags++
       } else if (cell[row][col].className === '' || cell[row][col].className === 'norm') {
+        this.flagSound.play()
         this.arr[row][col].flag = true
         cell[row][col].className = 'flag'
         this.flags--
@@ -148,6 +164,12 @@ class MineField {
           }
         }
       }
+    }
+    if (!(this.cheatOnce)) {
+      this.cheerSound.play()
+    }
+    else {
+      this.clapSound.play()
     }
     setTimeout(function () {
       window.alert('You Win\nClick create board to play again')
