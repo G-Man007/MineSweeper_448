@@ -258,7 +258,7 @@ class MineField {
     let pattern = /clicked/
     for (let k = 0; k < this.height; k++) {
       for (let j = 0; j < this.width; j++) {
-        if (pattern.test(cell[k][j].className) || cell[k][j].className === 'flag') {
+        if (pattern.test(cell[k][j].className) || cell[k][j].className === 'flag' || cell[k][j].className === 'bomb') {
           revealed++
         }
       }
