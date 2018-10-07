@@ -1,5 +1,6 @@
-let grid = null;
-let gField = null;
+let grid = null
+let field = null
+let cell = null
 /**
  * Represents a board. Pre: Empty body of HTML; Post: Playing field is generated in the body
  * @constructor
@@ -9,8 +10,8 @@ let gField = null;
  * @returns - nothing
  */
 function drawBoard (height, width, bombsLeft) {
-  let cell = []
-  let field = new MineField(height, width, bombsLeft)
+  cell = []
+  field = new MineField(height, width, bombsLeft)
 
   grid = document.createElement('table')
   grid.className = 'grid'
@@ -35,22 +36,35 @@ function drawBoard (height, width, bombsLeft) {
         return false
       }
     }
-
-	gField = field;
-
-	document.body.appendChild(grid);
-}
-/**
+    document.body.appendChild(grid)
+  }
+  /**
  * Removes the old table from the page. Pre: Grid is already generated; Post: All elements of the grid are delered
  * @function
  * @returns - nothing
  */
-function deleteBoard () {
-  if (grid != null) {
-    document.body.removeChild(grid)
+  function deleteBoard () {
+    if (grid != null) {
+      document.body.removeChild(grid)
+    }
   }
-}
 
-function Cheat(){
-	gField.cheat();
+  function CheatMode () {
+    for (let k = 0; k < field.height; k++) {
+      for (let j = 0; j < field.width; j++) {
+        if (cell[k][j].cheat === false) {
+          cell[k][j].lastState = cell[k][j].className
+          if (cell[k][j].mine === true) {
+            cell[k][j].className = 'bomb'
+          } else {
+            cell[k][j].className = 'clicked' + cell[k][j].adjminenum
+          }
+          cell[k][j].cheat = true
+        } else {
+          cell[k][j].cheat = false
+          cell[k][j].className = cell[k][j].lastState
+        }
+      }
+    }
+  }
 }

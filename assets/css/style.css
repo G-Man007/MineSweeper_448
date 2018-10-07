@@ -33,7 +33,7 @@
   padding: 15px 15px;
 }
 
-.grid td.clicked {
+.grid td.clicked0 {
 	background-color:  #c0ccf2 ;
 	/*background: url("images/zero.jpg") no-repeat scroll 0 0 transparent;
 	color: #cccccc;
