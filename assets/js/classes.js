@@ -299,8 +299,4 @@ class MineField {
 		}
     return 10
   }
-
-
-
-
 }
