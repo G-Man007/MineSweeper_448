@@ -151,12 +151,12 @@ class MineField {
  * @returns - if cell is already clicked or a bomb is found, otherwise nothing
  */
   Expand (cell, row, col) {
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 0; i <= 8; i++) {
       if (cell[row][col].className === 'clicked' + i) {
         return
       }
     }
-    if (this.arr[row][col].flag || cell[row][col].className === 'clicked0') {
+    if (this.arr[row][col].flag) {
       return
     }
     if (this.arr[row][col].adjminenum === 0 && !(this.arr[row][col].mine)) {
@@ -259,7 +259,7 @@ class MineField {
     let pattern = /clicked/
     for (let k = 0; k < x; k++) {
       for (let j = 0; j < y; j++) {
-        if (pattern.test(cell[k][j].className || cell[k][j].className === 'flag')) {
+        if (pattern.test(cell[k][j].className) || cell[k][j].className === 'flag') {
           revealed++
         }
       }
