@@ -235,10 +235,11 @@ class MineField {
   statsReport (cell, row, colm) {
     let x = row + 1
     let y = colm + 1
-    let coordinate = '(' + y + ',' + x + ')'
+    let coordinate = '( ' + y + ' , ' + x + ' )'
     let revealedTiles = this.revealedTiles(cell)
-    let bombstoBeFlagged = this.bombsLeft()
-    return ('Coordinates: ' + coordinate + '  Revealed Tiles: ' + revealedTiles + ' Other: ' + bombstoBeFlagged)
+    let mineRisks = this.mineRisk(cell,row,colm)
+		let percent = this.potentialChance(cell,row,colm)
+    return ('Coordinates : ' + coordinate + '  Revealed Tiles : ' + revealedTiles +  ' Proximity Report : ' + mineRisks + ' Potential Chance : ' + percent + '%')
   }
 
   /**
@@ -266,11 +267,35 @@ class MineField {
   }
 
   /**
-* returns the amount of bombs left
+* gives the risk of nearby mine
 * @function
 * @returns - returns the amount of bombs left
 */
-  bombsLeft () {
+  mineRisk (cell,row,colm) {
+		let risk = 0;
+		for (let i = 1; i <= 8; i++) {
+      if (cell[row][colm].className === 'clicked' + i) {
+        risk = i
+      }
+    }
+		let neat = risk + "/" + 8
+    return neat
+  }
+	/**
+* gives the risk of nearby mine
+* @function
+* @returns - returns the amount of bombs left
+*/
+  potentialChance (cell,row,colm) {
+		let percent = 0
+		let pattern = /clicked/
+		if (pattern.test(cell[row][colm].className || cell[row][colm].className === 'flag')) {
+			return percent
+		}
     return 10
   }
+
+
+
+
 }
