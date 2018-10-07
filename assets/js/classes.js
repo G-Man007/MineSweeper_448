@@ -327,7 +327,8 @@ class MineField {
 * @returns - returns the amount of bombs left
 */
   potentialChance (cell, row, colm, bombsLeft) {
-    let percent = (bombsLeft / this.height * this.width)
+		let board = this.height * this.width
+    let percent = (bombsLeft / board)
     let pattern = /clicked/
 		let clicked = 0
 
@@ -343,7 +344,10 @@ class MineField {
         }
       }
     }
-		percent = Math.ceil(((bombsLeft) / ((this.height * this.width)-clicked))*100)
+		if(clicked == board){
+			clicked = 1
+		}
+		percent = Math.ceil(((bombsLeft) / (board-clicked))*100)
     return percent
   }
 }
