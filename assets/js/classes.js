@@ -35,7 +35,6 @@ class MineField {
     this.flags = numBombs
     this.arr = []
     this.endgame = false
-   // clickSound = new sound(".../")
 
     for (let i = 0; i < height; i++) {
       this.arr.push([0])
@@ -84,9 +83,9 @@ class MineField {
         }
       }
     }
-    //checks that if all flags have been used, which means that the board is possibly won
+    // checks that if all flags have been used, which means that the board is possibly won
     if (this.flags === 0) {
-        this.endgame = this.Checkwin()
+      this.endgame = this.Checkwin()
     }
   }
 
@@ -143,9 +142,9 @@ class MineField {
         if (this.arr[i][j].mine && !(this.arr[i][j].flag)) {
           return false
         }
-        if(!(this.arr[i][j].mine)) {
-          if(!(this.arr[i][j].clicked)) {
-              return false
+        if (!(this.arr[i][j].mine)) {
+          if (!(this.arr[i][j].clicked)) {
+            return false
           }
         }
       }
@@ -311,19 +310,4 @@ class MineField {
     }
     return 10
   }
-    
- /* sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function(){
-        this.sound.play();
-    }
-    this.stop = function(){
-        this.sound.pause();
-    }
-}*/
 }
