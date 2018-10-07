@@ -271,14 +271,14 @@ class MineField {
 * @param the row and column cooridnate from the 2D array
 * @returns - string for the stats report text box in nav bar
 */
-  statsReport (cell, row, colm) {
+  statsReport (cell, row, colm, bombsLeft) {
     let x = row + 1
     let y = colm + 1
     let coordinate = '( ' + y + ' , ' + x + ' )'
     let revealedTiles = this.revealedTiles(cell)
     let mineRisks = this.mineRisk(cell, row, colm)
-    let percent = this.potentialChance(cell, row, colm)
-    return ('Coordinates : ' + coordinate + ' Walkable Tiles : ' + revealedTiles + ' Proximity Report : ' + mineRisks + ' Percentage Here : ' + percent + '%')
+    let percent = this.potentialChance(cell, row, colm, bombsLeft)
+    return ('Coordinates : ' + coordinate + ' Revealed Tiles : ' + revealedTiles + ' Proximity Report : ' + mineRisks + ' Mine Chance : ' + percent + '%')
   }
 
   /**
@@ -315,6 +315,9 @@ class MineField {
         risk = i
       }
     }
+		if(cell[row][colm].className === 'bomb'){
+			return 'BOMB'
+		}
     let neat = risk + '/' + 8
     return neat
   }
@@ -323,13 +326,24 @@ class MineField {
 * @function
 * @returns - returns the amount of bombs left
 */
-  potentialChance (cell, row, colm) {
-    let percent = 0
+  potentialChance (cell, row, colm, bombsLeft) {
+    let percent = (bombsLeft / this.height * this.width)
     let pattern = /clicked/
+		let clicked = 0
+
     if (pattern.test(cell[row][colm].className) || cell[row][colm].className === 'flag') {
+			percent = 0
       return percent
     }
 
-    return 10
+		for (let k = 0; k < this.height; k++) {
+      for (let j = 0; j < this.width; j++) {
+        if (pattern.test(cell[k][j].className) || cell[k][j].className === 'flag' ) {
+          clicked+=1
+        }
+      }
+    }
+		percent = Math.ceil(((bombsLeft) / ((this.height * this.width)-clicked))*100)
+    return percent
   }
 }
