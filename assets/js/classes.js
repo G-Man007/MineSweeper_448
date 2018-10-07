@@ -242,9 +242,9 @@ class MineField {
     let y = colm + 1
     let coordinate = '( ' + y + ' , ' + x + ' )'
     let revealedTiles = this.revealedTiles(cell)
-    let mineRisks = this.mineRisk(cell,row,colm)
-		let percent = this.potentialChance(cell,row,colm)
-    return ('Coordinates : ' + coordinate + '  Revealed Tiles : ' + revealedTiles +  ' Proximity Report : ' + mineRisks + ' Potential Chance : ' + percent + '%')
+    let mineRisks = this.mineRisk(cell, row, colm)
+    let percent = this.potentialChance(cell, row, colm)
+    return ('Coordinates : ' + coordinate + '  Revealed Tiles : ' + revealedTiles + ' Proximity Report : ' + mineRisks + ' Potential Chance : ' + percent + '%')
   }
 
   /**
@@ -255,19 +255,17 @@ class MineField {
 */
   revealedTiles (cell) {
     let revealed = 0
-    let x = this.height
-    let y = this.width
     let pattern = /clicked/
-    for (let k = 0; k < x; k++) {
-      for (let j = 0; j < y; j++) {
+    for (let k = 0; k < this.height; k++) {
+      for (let j = 0; j < this.width; j++) {
         if (pattern.test(cell[k][j].className) || cell[k][j].className === 'flag') {
           revealed++
         }
       }
     }
 
-    let total = x * y
-    let final = (revealed + (this.bombs - this.flags)) + '/' + total
+    let total = this.height * this.width
+    let final = revealed + '/' + total
     return final
   }
 
@@ -276,27 +274,27 @@ class MineField {
 * @function
 * @returns - returns the amount of bombs left
 */
-  mineRisk (cell,row,colm) {
-		let risk = 0;
-		for (let i = 1; i <= 8; i++) {
+  mineRisk (cell, row, colm) {
+    let risk = 0
+    for (let i = 1; i <= 8; i++) {
       if (cell[row][colm].className === 'clicked' + i) {
         risk = i
       }
     }
-		let neat = risk + "/" + 8
+    let neat = risk + '/' + 8
     return neat
   }
-	/**
+  /**
 * gives the risk of nearby mine
 * @function
 * @returns - returns the amount of bombs left
 */
-  potentialChance (cell,row,colm) {
-		let percent = 0
-		let pattern = /clicked/
-		if (pattern.test(cell[row][colm].className || cell[row][colm].className === 'flag')) {
-			return percent
-		}
+  potentialChance (cell, row, colm) {
+    let percent = 0
+    let pattern = /clicked/
+    if (pattern.test(cell[row][colm].className || cell[row][colm].className === 'flag')) {
+      return percent
+    }
     return 10
   }
 }
