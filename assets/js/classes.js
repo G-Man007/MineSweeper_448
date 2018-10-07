@@ -251,17 +251,17 @@ class MineField {
     let revealed = 0
     let x = this.height
     let y = this.width
-    let pattern = /clicked./
+    let pattern = /clicked/
     for (let k = 0; k < x; k++) {
       for (let j = 0; j < y; j++) {
-        if (pattern.test(cell[k][j].className)) {
+        if (pattern.test(cell[k][j].className || cell[k][j].className === 'flag')) {
           revealed++
         }
       }
     }
 
     let total = x * y
-    let final = revealed + '/' + total
+    let final = (revealed + (this.bombs - this.flags)) + '/' + total
     return final
   }
 
