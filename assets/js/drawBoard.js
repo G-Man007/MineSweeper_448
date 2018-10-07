@@ -1,6 +1,8 @@
 let grid = null
 let field = null
 let cell = null
+// sound file for cheating from https://freesound.org/people/FuelStream/sounds/336276/
+let cheaterSound = new Audio('./assets/css/sounds/cheaterSound.wav')
 /**
  * Represents a board. Pre: Empty body of HTML; Post: Playing field is generated in the body
  * @constructor
@@ -57,6 +59,10 @@ function deleteBoard () {
  * @returns - nothing
  */
 function CheatMode () {
+  if (field.arr[0][0].cheat === false) {
+    cheaterSound.play()
+    field.cheatOnce = true
+  }
   for (let k = 0; k < field.height; k++) {
     for (let j = 0; j < field.width; j++) {
       if (field.arr[k][j].cheat === false) {
