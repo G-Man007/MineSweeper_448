@@ -244,7 +244,7 @@ class MineField {
     let revealedTiles = this.revealedTiles(cell)
     let mineRisks = this.mineRisk(cell, row, colm)
     let percent = this.potentialChance(cell, row, colm)
-    return ('Coordinates : ' + coordinate + '  Revealed Tiles : ' + revealedTiles + ' Proximity Report : ' + mineRisks + ' Potential Chance : ' + percent + '%')
+    return ('Coordinates : ' + coordinate + ' Walkable Tiles : ' + revealedTiles + ' Proximity Report : ' + mineRisks + ' Percentage Here : ' + percent + '%')
   }
 
   /**
@@ -292,9 +292,10 @@ class MineField {
   potentialChance (cell, row, colm) {
     let percent = 0
     let pattern = /clicked/
-    if (pattern.test(cell[row][colm].className || cell[row][colm].className === 'flag')) {
+    if (pattern.test(cell[row][colm].className) || cell[row][colm].className === 'flag') {
       return percent
     }
+
     return 10
   }
 }
