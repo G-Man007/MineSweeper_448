@@ -14,6 +14,7 @@ class Tile {
     this.revealed = false
     this.cheat = false
     this.lastState = ''
+    this.clicked = false
   }
 }
 /**
@@ -34,6 +35,7 @@ class MineField {
     this.flags = numBombs
     this.arr = []
     this.endgame = false
+   // clickSound = new sound(".../")
 
     for (let i = 0; i < height; i++) {
       this.arr.push([0])
@@ -69,9 +71,11 @@ class MineField {
         } else {
         // checks for all of the possible types of cells the clicked one could be
           if (this.arr[row][col].adjminenum === 0) {
+            this.arr[row][col].clicked = true
             this.Expand(cell, row, col)
           } else {
             for (let i = 1; i <= 8; i++) {
+              this.arr[row][col].clicked = true
               if (this.arr[row][col].adjminenum === i) {
                 cell[row][col].className = 'clicked' + i
               }
@@ -79,6 +83,10 @@ class MineField {
           }
         }
       }
+    }
+    //checks that if all flags have been used, which means that the board is possibly won
+    if (this.flags === 0) {
+        this.endgame = this.Checkwin()
     }
   }
 
@@ -117,7 +125,7 @@ class MineField {
         this.flags--
       }
       if (this.flags === 0) {
-        this.endgame = this.Checkflags()
+        this.endgame = this.Checkwin()
       }
       return this.flags
     } else {
@@ -129,11 +137,16 @@ class MineField {
  * @function
  * @returns - false if there are unflagged mines, true if the game ends
  */
-  Checkflags () {
+  Checkwin () {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         if (this.arr[i][j].mine && !(this.arr[i][j].flag)) {
           return false
+        }
+        if(!(this.arr[i][j].mine)) {
+          if(!(this.arr[i][j].clicked)) {
+              return false
+          }
         }
       }
     }
@@ -160,6 +173,7 @@ class MineField {
       return
     }
     if (this.arr[row][col].adjminenum === 0 && !(this.arr[row][col].mine)) {
+      this.arr[row][col].clicked = true
       cell[row][col].className = 'clicked0'
       if (row > 0) {
         this.Expand(cell, row - 1, col)
@@ -297,4 +311,19 @@ class MineField {
     }
     return 10
   }
+    
+ /* sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+}*/
 }
