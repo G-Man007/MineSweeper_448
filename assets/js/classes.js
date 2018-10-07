@@ -37,16 +37,16 @@ class MineField {
     this.arr = []
     this.endgame = false
     this.cheatOnce = false
-      
-    //sound file for button from https://freesound.org/people/JarredGibb/sounds/219472/
+
+    // sound file for button from https://freesound.org/people/JarredGibb/sounds/219472/
     this.buttonSound = new Audio('./assets/css/sounds/buttonSound.wav')
-    //sound file for losing from https://freesound.org/people/sharesynth/sounds/344505/
+    // sound file for losing from https://freesound.org/people/sharesynth/sounds/344505/
     this.loseSound = new Audio('./assets/css/sounds/loseSound.wav')
-    //sound file for flags from https://freesound.org/people/Mattix/sounds/370367/
+    // sound file for flags from https://freesound.org/people/Mattix/sounds/370367/
     this.flagSound = new Audio('./assets/css/sounds/flagSound.wav')
-    //sound file for cheer from https://freesound.org/people/jayfrosting/sounds/333404/
+    // sound file for cheer from https://freesound.org/people/jayfrosting/sounds/333404/
     this.cheerSound = new Audio('./assets/css/sounds/cheerSound.wav')
-    //sound file for clap from https://freesound.org/people/FreqMan/sounds/335107/
+    // sound file for clap from https://freesound.org/people/FreqMan/sounds/335107/
     this.clapSound = new Audio('./assets/css/sounds/clapSound.wav')
 
     for (let i = 0; i < height; i++) {
@@ -82,8 +82,8 @@ class MineField {
             window.alert('You Lose\nClick create board to try again')
           }, 25)
         } else {
-            this.buttonSound.play()
-        // checks for all of the possible types of cells the clicked one could be
+          this.buttonSound.play()
+          // checks for all of the possible types of cells the clicked one could be
           if (this.arr[row][col].adjminenum === 0) {
             this.arr[row][col].clicked = true
             this.Expand(cell, row, col)
@@ -98,9 +98,9 @@ class MineField {
         }
       }
     }
-    //checks that if all flags have been used, which means that the board is possibly won
+    // checks that if all flags have been used, which means that the board is possibly won
     if ((this.flags === 0) && (this.endgame === false)) {
-        this.endgame = this.Checkwin()
+      this.endgame = this.Checkwin()
     }
   }
 
@@ -167,8 +167,7 @@ class MineField {
     }
     if (!(this.cheatOnce)) {
       this.cheerSound.play()
-    }
-    else {
+    } else {
       this.clapSound.play()
     }
     setTimeout(function () {
