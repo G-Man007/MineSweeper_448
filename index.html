@@ -7,6 +7,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <script type="text/javascript" src="assets/js/drawBoard.js"></script>
   <script type="text/javascript" src="assets/js/classes.js"></script>
+  <script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -43,55 +45,60 @@
           </form>
         </li>
         <li><button type="button" id="btn-success">Create Board</button></li>
+
+        <li><button type="button" id="btn-cheat">Cheat Mode</button></li>
         <!--This is where the text box for my hover is located!-->
         <li><div class="stats"><form.oninput="stats.value" id="statsNow"> <output name"statsOut"></div></li>
         <script>
 
-            let button = document.getElementById('btn-success');
+            let button = document.getElementById('btn-success')
+            let cheatBtn = document.getElementById('btn-cheat')
 
             function load(){ //runs on the page load and creates a default grid
 
                 let pressed = false;
-                    let bombs = document.getElementById('bombsInput');
-                    let rows = document.getElementById('rowsInput');
-                    let cols = document.getElementById('columnsInput');
-                    document.getElementById("flagsOutput").innerHTML = bombs.value;
-                    document.getElementById("flagsOutput").style.color="white";
-                    document.getElementById("flagsOutput").style.fontFamily="videophreak";
-                    document.getElementById("statsNow").innerHTML ="Hover Tile";
-                    drawBoard(rows.value, cols.value, bombs.value);
+                    let bombs = document.getElementById('bombsInput')
+                    let rows = document.getElementById('rowsInput')
+                    let cols = document.getElementById('columnsInput')
+                    document.getElementById("flagsOutput").innerHTML = bombs.value
+                    document.getElementById("flagsOutput").style.color="white"
+                    document.getElementById("flagsOutput").style.fontFamily="videophreak"
+                    document.getElementById("statsNow").innerHTML ="Hover Tile"
+                    drawBoard(rows.value, cols.value, bombs.value)
                 }
 
             button.addEventListener("click", function(event){
-                        bombs = document.getElementById('bombsInput');
-                        rows = document.getElementById('rowsInput');
-                        cols = document.getElementById('columnsInput');
+                        bombs = document.getElementById('bombsInput')
+                        rows = document.getElementById('rowsInput')
+                        cols = document.getElementById('columnsInput')
 
-                        document.getElementById("flagsOutput").innerHTML = bombs.value;
-                        document.getElementById("flagsOutput").style.color="white";
-                        document.getElementById("statsNow").innerHTML ="Hover Tile";
+                        document.getElementById("flagsOutput").innerHTML = bombs.value
+                        document.getElementById("flagsOutput").style.color="white"
+                        document.getElementById("statsNow").innerHTML ="Hover Tile"
                         if(rows.value < 2 || cols.value < 2){
-                            window.alert("Invalid input\nBoard must be at least 2 x 2");
+                            window.alert("Invalid input\nBoard must be at least 2 x 2")
                         }
                         else if(rows.value > 40 || cols.value > 40){
-                            window.alert("Invalid input\nBoard must be less than 40 x 40");
+                            window.alert("Invalid input\nBoard must be less than 40 x 40")
                         }
                         else if(bombs.value < 1){
-                            window.alert("Invalid input\nBoard must have at least 1 bomb");
+                            window.alert("Invalid input\nBoard must have at least 1 bomb")
                         }
                         else if(bombs.value > ((rows.value * cols.value) - 1)){
-                            window.alert("Invalid input\nBoard must have less bombs than cells");
+                            window.alert("Invalid input\nBoard must have less bombs than cells")
                         }
                         else {
-                            deleteBoard();
-                            drawBoard(rows.value, cols.value, bombs.value);
+                            deleteBoard()
+                            drawBoard(rows.value, cols.value, bombs.value)
                         }
-          });
+            })
 
+            cheatBtn.addEventListener("click", function(event){
+                CheatMode()
+            })
         //  button.addEventListener("mouseover"), function(event){
             //  document.getElementById("s")
         //  });
-
         </script>
       </ul>
     </div><!--/.nav-collapse -->
@@ -99,6 +106,5 @@
 </nav>
 <body onload ="load()" </body>
 </body>
-<script type="text/javascript" src="assets/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 </html>

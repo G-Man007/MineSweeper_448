@@ -11,6 +11,9 @@ class Tile {
     this.mine = false
     this.flag = false
     this.adjminenum = 0
+    this.revealed = false
+    this.cheat = false
+    this.lastState = ''
   }
 }
 /**
@@ -46,30 +49,32 @@ class MineField {
   }
 
   /**
- * Calls the expansion and checks for bombs in the cell clicked on. Pre: cells already generated; Post: based on the type of cell, different outcomes occur
- * @function
- * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
- * @param {int} row - The row of the grid the cell is in.
- * @param {int} col - The column of the grid the cell is in.
- * @returns - nothing
- */
+* Calls the expansion and checks for bombs in the cell clicked on. Pre: cells already generated; Post: based on the type of cell, different outcomes occur
+* @function
+* @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {int} row - The row of the grid the cell is in.
+* @param {int} col - The column of the grid the cell is in.
+* @returns - nothing
+*/
   Click (cell, row, col) {
-    if (!(this.endgame) && !(this.arr[row][col].flag)) {
-      if (this.arr[row][col].mine === true) {
-        cell[row][col].className = 'bomb'
-        this.ShowBombs(cell)
-        this.endgame = true
-        setTimeout(function () {
-          window.alert('You Lose\nClick create board to try again')
-        }, 25)
-      } else {
-      // checks for all of the possible types of cells the clicked one could be
-        if (this.arr[row][col].adjminenum === 0) {
-          this.Expand(cell, row, col)
+    if (this.arr[row][col].cheat === false) {
+      if (!(this.endgame) && !(this.arr[row][col].flag)) {
+        if (this.arr[row][col].mine === true) {
+          cell[row][col].className = 'bomb'
+          this.ShowBombs(cell)
+          this.endgame = true
+          setTimeout(function () {
+            window.alert('You Lose\nClick create board to try again')
+          }, 25)
         } else {
-          for (let i = 1; i <= 8; i++) {
-            if (this.arr[row][col].adjminenum === i) {
-              cell[row][col].className = 'clicked' + i
+        // checks for all of the possible types of cells the clicked one could be
+          if (this.arr[row][col].adjminenum === 0) {
+            this.Expand(cell, row, col)
+          } else {
+            for (let i = 1; i <= 8; i++) {
+              if (this.arr[row][col].adjminenum === i) {
+                cell[row][col].className = 'clicked' + i
+              }
             }
           }
         }
@@ -151,11 +156,11 @@ class MineField {
         return
       }
     }
-    if (this.arr[row][col].flag || cell[row][col].className === 'clicked') {
+    if (this.arr[row][col].flag || cell[row][col].className === 'clicked0') {
       return
     }
     if (this.arr[row][col].adjminenum === 0 && !(this.arr[row][col].mine)) {
-      cell[row][col].className = 'clicked'
+      cell[row][col].className = 'clicked0'
       if (row > 0) {
         this.Expand(cell, row - 1, col)
         if (col > 0) {
