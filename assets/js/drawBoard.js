@@ -1,7 +1,7 @@
 let grid = null
 let field = null
 let cell = null
-// sound file for cheating from https://freesound.org/people/FuelStream/sounds/336276/
+// sound file for cheating sound from https://freesound.org/people/FuelStream/sounds/336276/
 let cheaterSound = new Audio('./assets/css/sounds/cheaterSound.wav')
 /**
  * Represents a board. Pre: Empty body of HTML; Post: Playing field is generated in the body
@@ -43,7 +43,7 @@ function drawBoard (height, width, bombs) {
 }
 
 /**
- * Removes the old table from the page. Pre: Grid is already generated; Post: All elements of the grid are delered
+ * Removes the old table from the page. Pre: Grid is already generated; Post: All elements of the grid are deleted
  * @function
  * @returns - nothing
  */
@@ -54,7 +54,8 @@ function deleteBoard () {
 }
 
 /**
- * Removes the old table from the page. Pre: Grid is already generated; Post: All elements of the grid are delered
+ * @desc Reveals all tiles on first button press and sets it back on second. Pre: Grid is already generated; Post: Reveals 
+ *       tiles/Return to previous state
  * @function
  * @returns - nothing
  */
