@@ -79,7 +79,7 @@ class MineField {
           this.loseSound.play()
           setTimeout(function () {
             window.alert('You Lose\nClick create board to try again')
-          }, 25)
+          }, 30)
         } else {
           this.buttonSound.play()
           // checks for all of the possible types of cells the clicked one could be
@@ -171,7 +171,7 @@ class MineField {
     }
     setTimeout(function () {
       window.alert('You Win\nClick create board to play again')
-    }, 25)
+    }, 30)
     return true
   }
   /**
@@ -267,7 +267,10 @@ class MineField {
   /**
 * Gives string that will fill the stats box with disired statistics
 * @function
-* @param the row and column cooridnate from the 2D array
+* @param {array} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @param {int} bombs - Amount of bombs in the board
 * @returns - string for the stats report text box in nav bar
 */
   statsReport (cell, row, colm, bombs) {
@@ -284,6 +287,7 @@ class MineField {
 * returns the amount of revealedTiles left, statsReport helper
 * should format like 1/100
 * @function
+* @param {cell} cell - The entire grid of clickable cells that can alter a specific one with row and col.
 * @returns - amount of unchartedTiles left
 */
   revealedTiles (cell) {
@@ -303,9 +307,12 @@ class MineField {
   }
 
   /**
-* gives the risk of nearby mine
+* gives the risk of adjacent tiles having a mine
 * @function
-* @returns - returns the amount of bombs left
+* @param {array} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @returns - returns the amount of bombs surrounding
 */
   mineRisk (cell, row, colm) {
     let risk = 0
@@ -322,8 +329,12 @@ class MineField {
   }
 
   /**
-* gives the risk of nearby mine
+* gives the percentage risk of tile being a mine
 * @function
+* @param {array} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @param {int} bombs - Amount of bombs in the board
 * @returns - returns the amount of bombs left
 */
   potentialChance (cell, row, colm, bombs) {
@@ -361,6 +372,10 @@ class MineField {
   /**
 * Checks the surrounding tiles to see if adjminenum === flagged
 * @function
+* @param {array} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @param {mode} mode - lets the algorithm know to call saturated or missingMine
 * @returns - returns true if the tile is gauranteed NOT a mine
 */
   checkSurrounding (cell, row, colm, mode) {
@@ -391,6 +406,9 @@ class MineField {
   /**
 * Checks the surrounding tiles to see if flags === adjminenum
 * @function
+* @param {array} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
 * @returns - returns true if the condition is satisfied
 *          - returns false if not enough information
 */
@@ -419,6 +437,9 @@ class MineField {
   /**
 * Checks the surrounding tiles to see if flags + unclicked === adjminenum
 * @function
+* @param {array} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
 * @returns - returns true if the surrounding unclicked tiles must be mines
 *          - returns false if not enough information
 */
