@@ -67,8 +67,8 @@ class MineField {
 *       Pre: cells already generated;
 *       Post: based on the type of cell, different outcomes occur
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a
-*                     specific one with row and col.
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
 * @param {int} row - The row of the grid the cell is in.
 * @param {int} col - The column of the grid the cell is in.
 * @returns - Nothing
@@ -83,7 +83,7 @@ class MineField {
           this.loseSound.play()
           setTimeout(function () {
             window.alert('You Lose\nClick create board to try again')
-          }, 25)
+          }, 30)
         } else {
           this.buttonSound.play()
           // checks for all of the possible types of cells the clicked one could be
@@ -113,8 +113,8 @@ class MineField {
  *       Pre: cells are already generated;
  *       Post: all bombs are revealed.
  * @function
- * @param {int} cell - The entire grid of clickable cells that can alter a
- *                     specific one with row and col.
+ * @param {Object[]} cell - The entire grid of clickable cells that can alter a
+ *                          specific one with row and col.
  * @returns - Nothing
  */
   ShowBombs (cell) {
@@ -134,8 +134,8 @@ class MineField {
  *       Pre: cells are already generated;
  *       Post: flags are placed, removed, or the game ends.
  * @function
- * @param {int} cell - The entire grid of clickable cells that can alter a
- *                     specific one with row and col.
+ * @param {Object[]} cell - The entire grid of clickable cells that can alter a
+ *                          specific one with row and col.
  * @param {int} row - The row of the grid the cell is in.
  * @param {int} col - The column of the grid the cell is in.
  * @returns - Nothing
@@ -188,7 +188,7 @@ class MineField {
     }
     setTimeout(function () {
       window.alert('You Win\nClick create board to play again')
-    }, 25)
+    }, 30)
     return true
   }
 
@@ -198,8 +198,8 @@ class MineField {
  *       Post: from the original cell, it expands until numbered cells are
  *             revealed.
  * @function
- * @param {int} cell - The entire grid of clickable cells that can alter a
- *                     specific one with row and col.
+ * @param {Object[]} cell - The entire grid of clickable cells that can alter a
+ *                          specific one with row and col.
  * @param {int} row - The row of the grid the cell is in.
  * @param {int} col - The column of the grid the cell is in.
  * @returns - Nothing
@@ -296,10 +296,10 @@ class MineField {
 *       Post: Updates statsNow field with up to date revealed tiles and mine
 *             percent chance information
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a
-*                     specific one with row and col.
-* @param {int} row - The row of the grid the cell is in.
-* @param {int} colm - The column of the grid the cell is in.
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
 * @returns - String for the stats report text box in nav bar
 */
   statsReport (cell, row, colm) {
@@ -314,7 +314,7 @@ class MineField {
 *       Pre: cells was hovered and statsReport was called;
 *       Post: No board state change, string is returned
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
 *                     specific one with row and col.
 * @returns - A string representing the amount of tiles left
 */
@@ -340,10 +340,10 @@ class MineField {
 *       Post: integer representing percent change of tile being a mine is
 *             returned
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a
-*                     specific one with row and col.
-* @param {int} row - The row of the grid the cell is in.
-* @param {int} colm - The column of the grid the cell is in.
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
 * @returns - An integer represting the percent chance the hovered tile is a mine
 */
   potentialChance (cell, row, colm) {
@@ -385,12 +385,11 @@ class MineField {
 *       Post: Tile is either gauranteed a mine or gauranteed not a mine,
 *       otherwise false as no useful information is returned
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
 *                     specific one with row and col.
-* @param {int} row - The row of the grid the cell is in.
-* @param {int} colm - The column of the grid the cell is in.
-* @param {string} mode - Indicates what function to call on each surrounding
-*                        tile
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @param {string} mode - lets the algorithm know to call saturated or missingMine
 * @returns - True if the mode function call returns true, otherwise false
 */
   checkSurrounding (cell, row, colm, mode) {
@@ -422,10 +421,10 @@ class MineField {
   /**
 * @desc Checks the surrounding tiles to see if flags === adjminenum
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a
-*                     specific one with row and col.
-* @param {int} row - The row of the grid the cell is in.
-* @param {int} colm - The column of the grid the cell is in.
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
 * @returns - True if the adjminenum === flags, otherwise false
 */
   saturated (cell, row, colm) {
@@ -453,10 +452,10 @@ class MineField {
   /**
 * @desc Checks the surrounding tiles to see if flags + unclicked === adjminenum
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a
-*                     specific one with row and col.
-* @param {int} row - The row of the grid the cell is in.
-* @param {int} colm - The column of the grid the cell is in.
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
 * @returns - True if the surrounding unclicked tiles must be mines, otherwise
 *            false
 */
