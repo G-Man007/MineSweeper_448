@@ -166,7 +166,7 @@ class MineField {
  *       Pre: cells are already generated;
  *       Post: Game ends if all flags are placed correctly.
  * @function
- * @returns - false if there are unflagged mines, true if the game ends
+ * @returns - False if there are unflagged mines, true if the game ends
  */
   Checkwin () {
     for (let i = 0; i < this.height; i++) {
