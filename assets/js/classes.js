@@ -11,8 +11,6 @@ class Tile {
     this.mine = false
     this.flag = false
     this.adjminenum = 0
-    this.revealed = false
-    this.cheat = false
     this.cheatOnce = false
     this.lastState = ''
     this.clicked = false
@@ -37,6 +35,7 @@ class MineField {
     this.arr = []
     this.endgame = false
     this.cheatOnce = false
+    this.cheat = false
 
     // sound file for button from https://freesound.org/people/JarredGibb/sounds/219472/
     this.buttonSound = new Audio('./assets/css/sounds/buttonSound.wav')
@@ -71,7 +70,7 @@ class MineField {
 * @returns - nothing
 */
   Click (cell, row, col) {
-    if (this.arr[row][col].cheat === false) {
+    if (this.cheat === false) {
       if (!(this.endgame) && !(this.arr[row][col].flag)) {
         if (this.arr[row][col].mine === true) {
           cell[row][col].className = 'bomb'
@@ -226,18 +225,18 @@ class MineField {
   /**
 * Runs the expansion and checks for bombs in the cell clicked on. Pre: the cells and board are already created; Post: bombs are placed randomly throughout the board.
 * @function
-* @param {int} bombsLeft - The amount of bombs yet to be placed.
+* @param {int} bombs - The amount of bombs yet to be placed.
 * @returns - nothing
 */
-  placeBombs (bombsLeft) {
+  placeBombs (bombs) {
     let x = 0
     let y = 0
-    while (bombsLeft > 0) {
+    while (bombs > 0) {
       x = Math.floor(Math.random() * this.height)
       y = Math.floor(Math.random() * this.width)
       if (!(this.arr[x][y].mine)) {
         this.arr[x][y].mine = true
-        bombsLeft--
+        bombs--
         if (x > 0) {
           this.arr[x - 1][y].adjminenum++
           if (y > 0) {
@@ -271,13 +270,13 @@ class MineField {
 * @param the row and column cooridnate from the 2D array
 * @returns - string for the stats report text box in nav bar
 */
-  statsReport (cell, row, colm, bombsLeft) {
+  statsReport (cell, row, colm, bombs) {
     let x = row + 1
     let y = colm + 1
     let coordinate = '( ' + y + ' , ' + x + ' )'
     let revealedTiles = this.revealedTiles(cell)
     let mineRisks = this.mineRisk(cell, row, colm)
-    let percent = this.potentialChance(cell, row, colm, bombsLeft)
+    let percent = this.potentialChance(cell, row, colm, bombs)
     return ('Coordinates : ' + coordinate + ' Revealed Tiles : ' + revealedTiles + ' Proximity Report : ' + mineRisks + ' Mine Chance : ' + percent + '%')
   }
 
@@ -315,39 +314,136 @@ class MineField {
         risk = i
       }
     }
-		if(cell[row][colm].className === 'bomb'){
-			return 'BOMB'
-		}
+    if (cell[row][colm].className === 'bomb') {
+      return 'BOMB'
+    }
     let neat = risk + '/' + 8
     return neat
   }
+
   /**
 * gives the risk of nearby mine
 * @function
 * @returns - returns the amount of bombs left
 */
-  potentialChance (cell, row, colm, bombsLeft) {
-		let board = this.height * this.width
-    let percent = (bombsLeft / board)
+  potentialChance (cell, row, colm, bombs) {
+    let board = this.height * this.width
     let pattern = /clicked/
-		let clicked = 0
+    let clicked = 0
+    let percent = 0
 
-    if (pattern.test(cell[row][colm].className) || cell[row][colm].className === 'flag') {
-			percent = 0
-      return percent
+    if (pattern.test(cell[row][colm].className)) {
+      return 0
+    }
+    if (cell[row][colm].className === 'flag') {
+      return 100
+    }
+    if (this.checkSurrounding(cell, row, colm, 'saturated')) {
+      return 0
+    } else if (this.checkSurrounding(cell, row, colm, 'missingMine')) {
+      return 100
     }
 
-		for (let k = 0; k < this.height; k++) {
+    for (let k = 0; k < this.height; k++) {
       for (let j = 0; j < this.width; j++) {
-        if (pattern.test(cell[k][j].className) || cell[k][j].className === 'flag' ) {
-          clicked+=1
+        if (pattern.test(cell[k][j].className) || cell[k][j].className === 'flag') {
+          clicked++
         }
       }
     }
-		if(clicked == board){
-			clicked = 1
-		}
-		percent = Math.ceil(((bombsLeft) / (board-clicked))*100)
+    if (clicked === board) {
+      clicked = 1
+    }
+    percent = Math.ceil(((this.flags) / (board - clicked)) * 100)
     return percent
+  }
+
+  /**
+* Checks the surrounding tiles to see if adjminenum === flagged
+* @function
+* @returns - returns true if the tile is gauranteed NOT a mine
+*/
+  checkSurrounding (cell, row, colm, mode) {
+    let left = row - 1
+    let right = row + 1
+    let up = colm - 1
+    let down = colm + 1
+
+    for (let i = left; i <= right; i++) {
+      for (let j = up; j <= down; j++) {
+        if (i >= 0 && j >= 0 && i < this.height && j < this.width) {
+          if (this.arr[i][j].clicked === true) {
+            if (mode === 'saturated') {
+              if (this.saturated(cell, i, j)) {
+                return true
+              }
+            } else if (mode === 'missingMine') {
+              if (this.missingMine(cell, i, j)) {
+                return true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+* Checks the surrounding tiles to see if flags === adjminenum
+* @function
+* @returns - returns true if the condition is satisfied
+*          - returns false if not enough information
+*/
+  saturated (cell, row, colm) {
+    let left = row - 1
+    let right = row + 1
+    let up = colm - 1
+    let down = colm + 1
+    let flagged = 0
+
+    for (let i = left; i <= right; i++) {
+      for (let j = up; j <= down; j++) {
+        if (i >= 0 && j >= 0 && i < this.height && j < this.width) {
+          if (cell[i][j].className === 'flag') {
+            flagged++
+          }
+        }
+      }
+    }
+    if (flagged >= this.arr[row][colm].adjminenum) {
+      return true
+    }
+    return false
+  }
+
+  /**
+* Checks the surrounding tiles to see if flags + unclicked === adjminenum
+* @function
+* @returns - returns true if the surrounding unclicked tiles must be mines
+*          - returns false if not enough information
+*/
+  missingMine (cell, row, colm) {
+    let left = row - 1
+    let right = row + 1
+    let up = colm - 1
+    let down = colm + 1
+    let flagged = 0
+    let unclicked = 0
+
+    for (let i = left; i <= right; i++) {
+      for (let j = up; j <= down; j++) {
+        if (i >= 0 && j >= 0 && i < this.height && j < this.width) {
+          if (cell[i][j].className === 'flag') {
+            flagged++
+          } else if (this.arr[i][j].clicked === false) {
+            unclicked++
+          }
+        }
+      }
+    }
+    if (this.arr[row][colm].adjminenum === (flagged + unclicked)) {
+      return true
+    }
+    return false
   }
 }
