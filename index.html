@@ -60,7 +60,7 @@
                     document.getElementById("flagsOutput").innerHTML = bombs.value
                     document.getElementById("flagsOutput").style.color="white"
                     document.getElementById("flagsOutput").style.fontFamily="videophreak"
-                    document.getElementById("statsNow").innerHTML ="Hover Tile for Statistics"
+                    document.getElementById("statsNow").innerHTML ="Hover any tile for chance"
                     drawBoard(rows.value, cols.value, bombs.value)
                 }
 
@@ -72,7 +72,7 @@
 
                         document.getElementById("flagsOutput").innerHTML = bombs.value
                         document.getElementById("flagsOutput").style.color="white"
-                        document.getElementById("statsNow").innerHTML ="Hover Tile"
+                        document.getElementById("statsNow").innerHTML ="Hover any tile for chance"
                         if(rows.value < 2 || cols.value < 2){
                             window.alert("Invalid input\nBoard must be at least 2 x 2")
                         }
