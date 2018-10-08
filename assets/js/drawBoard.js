@@ -8,12 +8,12 @@ let cheaterSound = new Audio('./assets/css/sounds/cheaterSound.wav')
  * @constructor
  * @param {int} height - The height of the grid.
  * @param {int} width - The width of the grid.
- * @param {int} bombsLeft - The amount of bombs to be placed in the grid.
+ * @param {int} bombs - The amount of bombs to be placed in the grid.
  * @returns - nothing
  */
-function drawBoard (height, width, bombsLeft) {
+function drawBoard (height, width, bombs) {
   cell = []
-  field = new MineField(height, width, bombsLeft)
+  field = new MineField(height, width, bombs)
 
   grid = document.createElement('table')
   grid.className = 'grid'
@@ -34,7 +34,7 @@ function drawBoard (height, width, bombsLeft) {
       }
 
       cell[r][c].onmouseover = function () {
-        document.getElementById('statsNow').innerHTML = field.statsReport(cell, r, c, bombsLeft)
+        document.getElementById('statsNow').innerHTML = field.statsReport(cell, r, c, bombs)
         return false
       }
     }
@@ -59,22 +59,26 @@ function deleteBoard () {
  * @returns - nothing
  */
 function CheatMode () {
-  if (field.arr[0][0].cheat === false) {
+  if (field.cheatOnce === false) {
     cheaterSound.play()
     field.cheatOnce = true
   }
-  for (let k = 0; k < field.height; k++) {
-    for (let j = 0; j < field.width; j++) {
-      if (field.arr[k][j].cheat === false) {
+  if (field.cheat === false) {
+    field.cheat = true
+    for (let k = 0; k < field.height; k++) {
+      for (let j = 0; j < field.width; j++) {
         field.arr[k][j].lastState = cell[k][j].className
         if (field.arr[k][j].mine === true) {
           cell[k][j].className = 'bomb'
         } else {
           cell[k][j].className = 'clicked' + field.arr[k][j].adjminenum
         }
-        field.arr[k][j].cheat = true
-      } else {
-        field.arr[k][j].cheat = false
+      }
+    }
+  } else {
+    field.cheat = false
+    for (let k = 0; k < field.height; k++) {
+      for (let j = 0; j < field.width; j++) {
         cell[k][j].className = field.arr[k][j].lastState
       }
     }
