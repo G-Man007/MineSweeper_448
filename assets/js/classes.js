@@ -4,7 +4,7 @@
  */
 class Tile {
 /**
- * Represents a single cell in the grid.
+ * @desc Default constructor of a tile
  * @constructor
  */
   constructor () {
@@ -16,12 +16,14 @@ class Tile {
     this.clicked = false
   }
 }
+
 /**
  * @class
  * @classdesc Represents the logic for the MineField.
  */
 class MineField {
-/**
+  /**
+ * @desc Default constructor of a MineField
  * @constructor
  * @param {int} height - The height of the grid.
  * @param {int} width - The width of the grid.
@@ -58,16 +60,18 @@ class MineField {
       }
     } // creates grid size and populates the array with mines
     this.placeBombs(numBombs)
-    // this.numberField();
   }
 
   /**
-* Calls the expansion and checks for bombs in the cell clicked on. Pre: cells already generated; Post: based on the type of cell, different outcomes occur
+* @desc Calls the expansion and checks for bombs in the cell clicked on.
+*       Pre: cells already generated;
+*       Post: based on the type of cell, different outcomes occur
 * @function
-* @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
 * @param {int} row - The row of the grid the cell is in.
 * @param {int} col - The column of the grid the cell is in.
-* @returns - nothing
+* @returns - Nothing
 */
   Click (cell, row, col) {
     if (this.cheat === false) {
@@ -79,7 +83,7 @@ class MineField {
           this.loseSound.play()
           setTimeout(function () {
             window.alert('You Lose\nClick create board to try again')
-          }, 25)
+          }, 30)
         } else {
           this.buttonSound.play()
           // checks for all of the possible types of cells the clicked one could be
@@ -104,10 +108,14 @@ class MineField {
   }
 
   /**
- * If the clicked on cell is a bomb and the endgame has occurred, this function turns all of the bombs visible. Pre: cells are already generated; Post: all bombs are revealed.
+ * @desc If the clicked on cell is a bomb and the endgame has occurred, this
+ *       function turns all of the bombs visible.
+ *       Pre: cells are already generated;
+ *       Post: all bombs are revealed.
  * @function
- * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
- * @returns - nothing
+ * @param {Object[]} cell - The entire grid of clickable cells that can alter a
+ *                          specific one with row and col.
+ * @returns - Nothing
  */
   ShowBombs (cell) {
     for (let i = 0; i < this.height; i++) {
@@ -118,13 +126,19 @@ class MineField {
       }
     }
   }
+
   /**
- * Handles the functionality of flags. If a flag is placed it will decrement and in the case all are gone it calls checkFlags to check if they're all in the correct place for the win. Pre: cells are already generated; Post: flags are placed, removed, or the game ends.
+ * @desc Handles the functionality of flags. If a flag is placed it will
+ *       decrement and in the case all are gone it calls checkFlags to check if
+ *       they're all in the correct place for the win.
+ *       Pre: cells are already generated;
+ *       Post: flags are placed, removed, or the game ends.
  * @function
- * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+ * @param {Object[]} cell - The entire grid of clickable cells that can alter a
+ *                          specific one with row and col.
  * @param {int} row - The row of the grid the cell is in.
  * @param {int} col - The column of the grid the cell is in.
- * @returns - nothing
+ * @returns - Nothing
  */
   Flag (cell, row, col) {
     if (!(this.endgame)) {
@@ -146,10 +160,13 @@ class MineField {
       return 0
     }
   }
+
   /**
- * Checks if all flags are in the correct place for the win. Pre: cells are already generated; Post: Game ends if all flags are placed correctly.
+ * @desc Checks if all flags are in the correct place for the win.
+ *       Pre: cells are already generated;
+ *       Post: Game ends if all flags are placed correctly.
  * @function
- * @returns - false if there are unflagged mines, true if the game ends
+ * @returns - False if there are unflagged mines, true if the game ends
  */
   Checkwin () {
     for (let i = 0; i < this.height; i++) {
@@ -171,16 +188,21 @@ class MineField {
     }
     setTimeout(function () {
       window.alert('You Win\nClick create board to play again')
-    }, 25)
+    }, 30)
     return true
   }
+
   /**
- * Runs the expansion and checks for bombs in the cell clicked on. Pre: A cell is clicked and is not a numbered cell; Post: from the original cell, it expands until numbered cells are revealed.
+ * @desc Runs the expansion and checks for bombs in the cell clicked on.
+ *       Pre: A cell is clicked and is not a numbered cell;
+ *       Post: from the original cell, it expands until numbered cells are
+ *             revealed.
  * @function
- * @param {int} cell - The entire grid of clickable cells that can alter a specific one with row and col.
+ * @param {Object[]} cell - The entire grid of clickable cells that can alter a
+ *                          specific one with row and col.
  * @param {int} row - The row of the grid the cell is in.
  * @param {int} col - The column of the grid the cell is in.
- * @returns - if cell is already clicked or a bomb is found, otherwise nothing
+ * @returns - Nothing
  */
   Expand (cell, row, col) {
     for (let i = 0; i <= 8; i++) {
@@ -222,11 +244,14 @@ class MineField {
       this.Click(cell, row, col)
     }
   }
+
   /**
-* Runs the expansion and checks for bombs in the cell clicked on. Pre: the cells and board are already created; Post: bombs are placed randomly throughout the board.
+* @desc Runs the expansion and checks for bombs in the cell clicked on.
+*       Pre: the cells and board are already created;
+*       Post: bombs are placed randomly throughout the board.
 * @function
 * @param {int} bombs - The amount of bombs yet to be placed.
-* @returns - nothing
+* @returns - Nothing
 */
   placeBombs (bombs) {
     let x = 0
@@ -264,27 +289,34 @@ class MineField {
       }
     }
   }
+
   /**
-* Gives string that will fill the stats box with disired statistics
+* @desc Gives string that will fill the stats box with disired statistics.
+*       Pre: cells is hovered;
+*       Post: Updates statsNow field with up to date revealed tiles and mine
+*             percent chance information
 * @function
-* @param the row and column cooridnate from the 2D array
-* @returns - string for the stats report text box in nav bar
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @returns - String for the stats report text box in nav bar
 */
-  statsReport (cell, row, colm, bombs) {
-    let x = row + 1
-    let y = colm + 1
-    let coordinate = '( ' + y + ' , ' + x + ' )'
+  statsReport (cell, row, colm) {
     let revealedTiles = this.revealedTiles(cell)
-    let mineRisks = this.mineRisk(cell, row, colm)
-    let percent = this.potentialChance(cell, row, colm, bombs)
-    return ('Coordinates : ' + coordinate + ' Revealed Tiles : ' + revealedTiles + ' Proximity Report : ' + mineRisks + ' Mine Chance : ' + percent + '%')
+    let percent = this.potentialChance(cell, row, colm)
+    return ('Revealed Tiles : ' + revealedTiles + ' Mine Chance : ' + percent + '%')
   }
 
   /**
-* returns the amount of revealedTiles left, statsReport helper
-* should format like 1/100
+* @desc Helper function of statsReport, creates the string showing tiles
+*       left / total.
+*       Pre: cells was hovered and statsReport was called;
+*       Post: No board state change, string is returned
 * @function
-* @returns - amount of unchartedTiles left
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                     specific one with row and col.
+* @returns - A string representing the amount of tiles left
 */
   revealedTiles (cell) {
     let revealed = 0
@@ -303,30 +335,18 @@ class MineField {
   }
 
   /**
-* gives the risk of nearby mine
+* @desc Gives the risk of the hovered tile being a mine.
+*       Pre: cell is hovered and statsReport is called;
+*       Post: integer representing percent change of tile being a mine is
+*             returned
 * @function
-* @returns - returns the amount of bombs left
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @returns - An integer represting the percent chance the hovered tile is a mine
 */
-  mineRisk (cell, row, colm) {
-    let risk = 0
-    for (let i = 1; i <= 8; i++) {
-      if (cell[row][colm].className === 'clicked' + i) {
-        risk = i
-      }
-    }
-    if (cell[row][colm].className === 'bomb') {
-      return 'BOMB'
-    }
-    let neat = risk + '/' + 8
-    return neat
-  }
-
-  /**
-* gives the risk of nearby mine
-* @function
-* @returns - returns the amount of bombs left
-*/
-  potentialChance (cell, row, colm, bombs) {
+  potentialChance (cell, row, colm) {
     let board = this.height * this.width
     let pattern = /clicked/
     let clicked = 0
@@ -359,9 +379,18 @@ class MineField {
   }
 
   /**
-* Checks the surrounding tiles to see if adjminenum === flagged
+* @desc Calls a function indicated by mode on all of the tiles surrounding the
+*       one located at (row, colm) to determine if the tile is a mine or not.
+*       Pre: Cell is not flagged or clicked;
+*       Post: Tile is either gauranteed a mine or gauranteed not a mine,
+*       otherwise false as no useful information is returned
 * @function
-* @returns - returns true if the tile is gauranteed NOT a mine
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                     specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @param {string} mode - lets the algorithm know to call saturated or missingMine
+* @returns - True if the mode function call returns true, otherwise false
 */
   checkSurrounding (cell, row, colm, mode) {
     let left = row - 1
@@ -386,13 +415,17 @@ class MineField {
         }
       }
     }
+    return false
   }
 
   /**
-* Checks the surrounding tiles to see if flags === adjminenum
+* @desc Checks the surrounding tiles to see if flags === adjminenum
 * @function
-* @returns - returns true if the condition is satisfied
-*          - returns false if not enough information
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @returns - True if the adjminenum === flags, otherwise false
 */
   saturated (cell, row, colm) {
     let left = row - 1
@@ -417,10 +450,14 @@ class MineField {
   }
 
   /**
-* Checks the surrounding tiles to see if flags + unclicked === adjminenum
+* @desc Checks the surrounding tiles to see if flags + unclicked === adjminenum
 * @function
-* @returns - returns true if the surrounding unclicked tiles must be mines
-*          - returns false if not enough information
+* @param {Object[]} cell - The entire grid of clickable cells that can alter a
+*                          specific one with row and col.
+* @param {int} row - The row used for input in cell
+* @param {int} colm - The column used for input in cell
+* @returns - True if the surrounding unclicked tiles must be mines, otherwise
+*            false
 */
   missingMine (cell, row, colm) {
     let left = row - 1
